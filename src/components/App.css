@@ -1,0 +1,200 @@
+/* Styles go here */
+body {
+	margin: 0;
+	background-image:linear-gradient( rgb(10, 134, 236), rgb(255, 255, 255));
+    color: #fff;
+	background-repeat: no-repeat;
+	margin-top: 50px;
+	margin-bottom: 100px;
+	font-family: Monospace;
+	font-size: 13px;
+	line-height: 24px;
+}
+
+
+a {
+	color: #ff0;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+button {
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+canvas {
+	display: block;
+}
+
+#info {
+	position: absolute;
+	top: 30px;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: center;
+	text-transform: uppercase;
+	z-index: 1; /* TODO Solve this in HTML */
+}
+
+#stats {
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: center;
+	/*z-index: 99999;*/
+}
+#guide {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	/*z-index: 99999;*/
+}
+#donations {
+	width: 100%;
+	display: none;
+	
+}
+#loader {
+	width: 100%;
+	height: 700px;
+	text-align: center;
+	background-color: #000;
+}
+#static{
+	color: darkolivegreen;
+}
+#footer{
+	color: #000;
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
+	text-align: center;
+}
+
+.dg.ac {
+	z-index: 2 !important; /* TODO Solve this in HTML */
+}
+#preview {
+	display: none;
+	
+}
+textarea{
+	width: 50%;
+	min-height: 250px;
+	overflow: scroll;
+	margin: auto;
+	display: inline-block;
+	background: #f4f4f9;
+	outline: none;
+	font-size: 14px;
+	font-family: Courier, sans-serif;
+}
+/*iframe{
+	bottom: 0;
+	width: 100%;
+	position: relative;
+	height: 35em;
+}*/
+.Resizer {
+	background: #000;
+	opacity: 0.2;
+	z-index: 10000;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+}
+/*.Resizer:hover{
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+	border: 10px solid #333642;
+}*/
+.Resizer.horizontal {
+	height: 3px;
+	margin: -5px 0;
+	border-top: 5px solid rgba(255, 255,255, 0);
+	border-bottom: 5px solid rgba(255, 255, 255, 0);
+	cursor: row-resize;
+	width: 100%;
+	border: 8px solid #333642;
+
+}
+/*.Resizer.horizontal:hover{
+	border-top: 5px solid rgba(0, 0, 0, 0.5);
+	border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+
+}*/
+.Resizer.vertical{
+	width: 11px;
+	margin: 0 -5px;
+	border: 8px solid #333642;
+	cursor: col-resize;
+
+}
+/*.Resizer.vertical:hover{
+	border-left: 5px solid rgba(0, 0, 0, 0.5);
+	border-right: 5px solid rgba(0, 0, 0, 0.5);
+}*/
+.Resizer.disabled {
+	cursor: not-allowed;
+}
+.Resizer.disabled:hover{
+	border-color: transparent;
+}
+
+.split-plane{
+	display: flex;
+	flex-direction: column;
+}
+.split-plane-top, .split-plane-bottom {
+	flex: 1;
+	overflow: hidden;
+}
+.split-plane-top{
+	background: #333642;
+}
+.split-plane-bottom{
+	background: #333642;
+}
+.main {
+	
+	overflow: auto;
+	justify-content: center;
+}
+.color-guide{
+	margin: 20px 40px;
+}
+h5{
+	margin-bottom: 10px;
+}
+.user{
+	padding: 7px 15px;
+	border-radius: 4px;
+	color: white;
+	font-size: 13px;
+	font-weight: bold;
+	background: #EE92C2;
+	margin: 10px 0;
+}
+.guest{
+	background: #F0c987;
+	color: white;
+}
+canvas{
+	cursor: crosshair;
+}
+.swatch{
+	width: 100px;
+	height: 50px;
+}
