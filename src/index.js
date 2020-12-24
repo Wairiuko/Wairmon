@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './components/Application';
 //import ThreeD from './components/3D';
 //import Static from './components/pages/static';
@@ -10,9 +10,9 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render((
-    <BrowserRouter>
+    <HashRouter>
 <App/> {/*Pages*/} 
-    </BrowserRouter>),
+    </HashRouter>),
  document.getElementById('root'));
 //ReactDOM.render(<Container />, document.getElementById("container"));
 //ReactDOM.render(<ThreeD />,document.getElementById("root"));
