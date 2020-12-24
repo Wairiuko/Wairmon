@@ -20,7 +20,7 @@ render() {
     <Route path='/home' component={Home}></Route>
     <Route path='/static' component={Static}></Route>
     <Route path='/artwork' component={Artwork}></Route>
-    <Route path='/project' component={Project}></Route>
+    <Route path='/project/:title' component={Project}></Route>
     </Switch>
   );
 }

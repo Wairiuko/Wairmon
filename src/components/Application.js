@@ -1,14 +1,14 @@
-import React, { Component, useState, useEffect } from 'react';
-import W3arts from '../abis/W3arts.json'
+import React, { Component } from 'react';
+//import W3arts from '../abis/W3arts.json'
 import Navbar from './Navbar'
 import {Link} from 'react-router-dom'
 import Web3 from 'web3';
-import loader from '../loading.gif';
+//import loader from '../loading.gif';
 import Body from "./Body";
 //import Home from "./pages/Home"
 import './App.css';
 import Web3Modal from 'web3modal'
-import { CullFaceNone } from 'three';
+//import { CullFaceNone } from 'three';
 
  //Declare IPFS
  //const ipfsClient = require('ipfs-http-client')

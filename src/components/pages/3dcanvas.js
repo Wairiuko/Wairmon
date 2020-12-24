@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import React, {Component} from 'react';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Vector3 } from 'three';
+//import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+//import { Vector3 } from 'three';
 import kloppen from '../../kloppenheim_02_4k.jpg';
 //import { PMREMGenerator } from '../js/PMREMGenerator.js';
 //import { PMREMCubeUVPacker } from '../js/PMREMCubeUVPacker.js';

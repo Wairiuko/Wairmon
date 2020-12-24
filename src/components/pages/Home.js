@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import W3arts from '../../abis/W3arts.json';
+//import W3arts from '../../abis/W3arts.json';
 //import Web3 from 'web3';
-import loader from '../../loading.gif';
+//import loader from '../../loading.gif';
 import Donations from './Donations';
+import { withRouter } from 'react-router-dom'
+//import Project from './project'
 
 //Declare IPFS
 //const ipfsClient = require('ipfs-http-client')
@@ -11,6 +13,55 @@ import Donations from './Donations';
 //const ipfs = new ipfsClient({host:'localhost', port: 5001, protocol:'http'});
 
 class Home extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.createRoom = this.createRoom.bind(this)
+  }
+   async createRoom(title) {
+    const Room = require('ipfs-pubsub-room')
+    const IPFS = require('ipfs')
+    const ipfs =  await IPFS.create({ 
+      EXPERIMENTAL: {
+      pubsub: true
+      },
+      config: {
+        Addresses: {
+          Swarm: []
+        }
+      }
+    })
+    /*ipfs.once('ready', () => ipfs.id((err, info) => {
+      if (err) {throw err }
+      console.log('IPFS node ready with address ' + info.id)
+    }))*/
+      const room = new Room(ipfs, `${title}`)
+      //console.log(`${title}`)
+      this.props.history.push(`project/${title}`)
+      /*room.on('peer joined', (peer) => console.log('peer' + peer + ' joined'))
+      room.on('peer left', (peer) => console.log('peer' + peer + ' left'))
+      //send/receive messages
+      room.on('peer joined', (peer) => room.sendTo(peer, 'Hello ' + peer + '!'))
+      room.on('message', (message) => console.log('got message from ' + message.from + ':' + message.dataToString()))
+
+      //broadcast message every 2 seconds
+      setInterval(() => room.broadcast('Hey everyone!'), 2000)*/
+      room.on('peer joined', (peer) => {
+        console.log('Peer joined the room', peer)
+      })
+      
+      room.on('peer left', (peer) => {
+        console.log('Peer left...', peer)
+      })
+      
+      // now started to listen to room
+      room.on('subscribed', () => {
+        console.log('Now connected!')
+      })
+    
+    
+  }
   /*async componentDidMount(){
     await this.loadBlockchainData();
   }
@@ -121,7 +172,7 @@ class Home extends Component {
         :*/
         <Donations
         //artworks={this.state.artworks}
-        //createArtwork={this.createArtwork}
+        createRoom={this.createRoom}
         //captureFile={this.captureFile}
         //changeArtwork={this.changeArtwork}
         //currentHash={this.state.currentHash}
@@ -135,4 +186,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter (Home);

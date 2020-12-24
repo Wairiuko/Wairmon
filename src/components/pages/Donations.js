@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import pantheon from '../../pantheon.png';
+//import pantheon from '../../pantheon.png';
 import {Link} from "react-router-dom";
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
@@ -49,9 +49,10 @@ class Donations extends Component {
             <h5>New Project:</h5>
             <form onSubmit={(event) => {
               event.preventDefault()
-              //const title = this.artworkTitle.value
+              const title = this.projectTitle.value
               //const description = this.artworkDescription.value
-              //this.props.createArtwork(title)
+              this.props.createRoom(title)
+              //this.props.history.push('/project')
             }} >
               
               {/*<label htmlFor='preview' className="btn  btn-dark btn-block btn-sm"> Choose Preview</label>
@@ -59,11 +60,12 @@ class Donations extends Component {
                 <div className="form-group mr-sm-2">
                   <label htmlFor='title'>Project Title: </label>
                   <input
-                    id="artworkTitle"
+                    id="projectTitle"
                     type="text"
-                    //ref={
-                      //(input) => { this.artworkTitle = input }
-                    //}
+                  
+                    ref={
+                      (input) => { this.projectTitle = input }
+                    }
                     className="form-control-sm"
                     required />
                   {/*<input
