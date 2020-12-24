@@ -11,16 +11,7 @@ import { withRouter } from 'react-router-dom'
 //const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
 //const ipfsClient = require('ipfs-http-client')
 //const ipfs = new ipfsClient({host:'localhost', port: 5001, protocol:'http'});
-
-class Home extends Component {
-
-  constructor(props){
-    super(props)
-
-    this.createRoom = this.createRoom.bind(this)
-  }
-   async createRoom(title) {
-    const Room = require('ipfs-pubsub-room')
+/*const Room = require('ipfs-pubsub-room')
     const IPFS = require('ipfs')
     const ipfs =  await IPFS.create({ 
       EXPERIMENTAL: {
@@ -35,10 +26,9 @@ class Home extends Component {
     /*ipfs.once('ready', () => ipfs.id((err, info) => {
       if (err) {throw err }
       console.log('IPFS node ready with address ' + info.id)
-    }))*/
+    }))
       const room = new Room(ipfs, `${title}`)
       //console.log(`${title}`)
-      this.props.history.push(`project/${title}`)
       /*room.on('peer joined', (peer) => console.log('peer' + peer + ' joined'))
       room.on('peer left', (peer) => console.log('peer' + peer + ' left'))
       //send/receive messages
@@ -46,21 +36,18 @@ class Home extends Component {
       room.on('message', (message) => console.log('got message from ' + message.from + ':' + message.dataToString()))
 
       //broadcast message every 2 seconds
-      setInterval(() => room.broadcast('Hey everyone!'), 2000)*/
-      room.on('peer joined', (peer) => {
-        console.log('Peer joined the room', peer)
-      })
+      setInterval(() => room.broadcast('Hey everyone!'), 2000)
       
-      room.on('peer left', (peer) => {
-        console.log('Peer left...', peer)
-      })
-      
-      // now started to listen to room
-      room.on('subscribed', () => {
-        console.log('Now connected!')
-      })
-    
-    
+      */
+class Home extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.createRoom = this.createRoom.bind(this)
+  }
+   async createRoom(title) {
+      this.props.history.push(`project/${title}`) 
   }
   /*async componentDidMount(){
     await this.loadBlockchainData();
