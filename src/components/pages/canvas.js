@@ -71,8 +71,9 @@ class Canvas extends Component{
     reset(){
         //clear rect
         //ADD MODAL TO CHOOSE CONFIRM
+        window.confirm("Do you want to delete this?");
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        //window.alert("Do you want to delete this?");
+        
     }
     colorSet(){
         this.color = this.colorInput.value; 
@@ -198,7 +199,7 @@ class Canvas extends Component{
                      <input type="range" id="size" min="1" max="100" ref={(ref) => (this.brushSize = ref)} onChange={this.brushResize}/>
                      <label htmlFor="opacity"><small style={{color: 'black'}}>Opacity</small></label>
                      <input type="range" min="0" max="100" ref={(ref) => (this.opacity = ref)} onChange={this.changeOpacity}/>
-                    {/*} <button onClick={this.reset}>Reset</button>*/}
+                     {/*<button onClick={this.reset}>Reset</button>*/}
                     
                     <div style={{position: 'relative'}}>
                         <canvas

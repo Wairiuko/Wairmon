@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import W3arts from '../abis/W3arts.json'
 import Navbar from './Navbar'
 import {Link} from 'react-router-dom'
@@ -7,15 +7,58 @@ import loader from '../loading.gif';
 import Body from "./Body";
 //import Home from "./pages/Home"
 import './App.css';
+import Web3Modal from 'web3modal'
+import { CullFaceNone } from 'three';
 
  //Declare IPFS
  //const ipfsClient = require('ipfs-http-client')
  //const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
- const date = new Date();
- const year = date.getFullYear();
+ const year = new Date().getFullYear();
+
+
 
 class App extends Component {
 
+
+constructor(props){
+  super(props)
+  this.state = {
+    account: '',
+    isLoggedIn : false,
+    //connect: false,
+    loading: true
+  }
+
+  this.connectWeb3 = this.connectWeb3.bind(this)
+}
+
+
+
+async connectWeb3() {
+  try{
+    const providerOptions = {};
+    const web3Modal = new Web3Modal({
+      network: 'mainnet',
+      cacheProvider: true,
+      providerOptions,
+      theme: 'dark'
+    })
+    const provider = await web3Modal.connect();
+    const web3 = new Web3(provider);
+    const accounts = await web3.eth.getAccounts();
+    
+    this.setState( { account: accounts[0] });
+    this.setState({ isLoggedIn: true })
+    
+  } catch (err) {
+    console.error(err);
+    window.alert('Error connecting to your wallet: ' + err);
+  }
+}
+
+
+
+//
   /*async componentDidMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
@@ -135,14 +178,13 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-            <Navbar //account={this.state.account}
+            <Navbar account={this.state.account} connect={this.connectWeb3}  isLoggedIn = {this.state.isLoggedIn}
              />
             
-        {/*this.state.loading ?<div id="loader"><img alt="Loading..." src={loader}/></div>*/
-           // :
-          }
+        {//this.state.loading ?<div id="loader"><img alt="Loading..." src={loader}/></div>
+            //:
             <Body/>
-        
+    }
         <nav className="navbar navbar-dark fixed-bottom bg-dark flex-md-nowrap p-0 shadow text-monospace">
           <ul  className="navbar-nav px-3 text-center">
             <li  className="nav-item text-nowrap d-none d-sm-none d-sm-block">
