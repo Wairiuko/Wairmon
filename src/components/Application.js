@@ -99,7 +99,7 @@ constructor(props){
   this.getAddress = this.getAddress.bind(this)
   //this.getSpace = this.getSpace.bind(this)
 }
-
+/*
 
 async getAddressFromMetaMask() {
   if (typeof window.ethereum == "undefined") {
@@ -125,9 +125,9 @@ async componentDidMount() {
     console.log(space)
     this.setState({ space })
   }
-}
-//async componentDidMount(){
-  //await this.connectWeb3()
+}*/
+async componentDidMount(){
+  await this.connectWeb3()
   //await this.getAddress()
   //const box = Box.create();
   //await box.syncDone
@@ -159,7 +159,7 @@ async componentDidMount() {
       this.setState({ space })
     }*/
   //this.setState({loading: false})
-//}
+}
 async getAddress(){
   this.setState({ loading: true })
   if (typeof window.ethereum == "undefined") {
