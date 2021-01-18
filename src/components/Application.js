@@ -17,17 +17,17 @@ import Project from './pages/project';
 //import ProjectForm from './pages/Form';
 import Box from '3box';
 //import { CullFaceNone } from 'three';
-
+//const Box = require('../lib/3box.min.js')
  //Declare IPFS
- const Ipfs = require('ipfs');
-const OrbitDB = require('orbit-db');
+ //const Ipfs = require('ipfs');
+//const OrbitDB = require('orbit-db');
 
  //const ipfsClient = require('ipfs-http-client')
  //const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
  const year = new Date().getFullYear();
 // Configuration for IPFS instance
 // Create IPFS instance
-const ipfsConfig = {
+/*const ipfsConfig = {
   repo: '/artwork',
   EXPERIMENTAL: {
     pubsub: true,
@@ -67,7 +67,7 @@ const dbConfig = {
   accessController: {
     write: ['*'],
   }
-}
+}*/
 
 
 class App extends Component {
@@ -87,42 +87,79 @@ constructor(props){
     //connect: false,
     loading: true,
     needWeb3: false,
+    needToWeb3Browser: false,
     //space: null,
     //profile: null,
-    //box: null
+    box: null
+
   }
 
   this.connectWeb3 = this.connectWeb3.bind(this)
   this.createProject = this.createProject.bind(this)
   this.getAddress = this.getAddress.bind(this)
-  this.getSpace = this.getSpace.bind(this)
+  //this.getSpace = this.getSpace.bind(this)
 }
 
-async componentDidMount(){
-  
+
+async getAddressFromMetaMask() {
+  if (typeof window.ethereum == "undefined") {
+    this.setState({ needToAWeb3Browser: true });
+  } else {
+    window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
+    const accounts = await window.ethereum.enable();
+    this.setState({ accounts });
+  }
+}
+async componentDidMount() {
+  //creates an instance of 3Box
+  const box = await Box.create(window.ethereum);
+  await this.getAddressFromMetaMask();
+
+  if (this.state.accounts) {
+    // Now MetaMask's provider has been enabled, we can start working with 3Box
+    await box.auth(['web3Art'], {
+      address : this.state.accounts[0]
+    })
+    // Opens the space we are using for the TODO app
+    const space = await box.openSpace('web3Art')
+    console.log(space)
+    this.setState({ space })
+  }
+}
+//async componentDidMount(){
+  //await this.connectWeb3()
+  //await this.getAddress()
+  //const box = Box.create();
+  //await box.syncDone
+
+  //await this.getProfile()
+  //await this.getBox()
   /*const box = await Box.openBox(this.state.account, window.ethereum);
   await box.syncDone;
   const space = box.openSpace('web-three-art');
   this.setState({ space, box });
   const config = await Box.getConfig(this.state.account)
-  console.log(config)
+  console.log(config)*/
   //await this.connectWeb3();
-  //await this.createDatabase();*/
-  const box = await Box.create(window.ethereum);
-  await this.getAddress()
+  //await this.createDatabase();
 
+  /*const box = await Box.create(window.ethereum);
+  
+  await this.getAddress()
     if (this.state.accounts) {
+      await box.syncDone
+      this.setState({ box: box })
       // Now MetaMask's provider has been enabled, we can start working with 3Box
-      await box.auth(['web3Art'], {
+      await this.state.box.auth(['3chat'], {
         address : this.state.accounts[0]
       })
       // Opens the space we are using for the TODO app
-      const space = await box.openSpace('web3Art')
-      console.log(space)
+      const space = await this.state.box.openSpace('3chat')
+      console.log(`space open`)
       this.setState({ space })
-    }
-  this.setState({loading: false})
-}
+    }*/
+  //this.setState({loading: false})
+//}
 async getAddress(){
   this.setState({ loading: true })
   if (typeof window.ethereum == "undefined") {
@@ -130,22 +167,34 @@ async getAddress(){
   } else {
     window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
     const accounts = await window.ethereum.enable();
-    this.setState({ accounts });
-    //this.setState({ loading: false })
+    this.setState({ account: accounts[0] });
+    //const box = Box.create(window.ethereum)
+    //await box.syncDone
+    //this.setState({ box })
+    const box = await Box.create(window.ethereum)
+    const profile = Box.getProfile(this.state.account);
+    //const profile = box.public.all();
+    //const profile = prof.public.get('name');
+    this.setState({ profile });
+    console.log(profile)
+    const space = box.auth(['web3Art'], {address: this.state.account}) 
+    console.log(space)
+    this.setState({ loading: false })
   }
 }
 async getProfile(){
   this.setState({ loading: true })
   //creates an instance of 3Box
-  const profile = Box.getProfile(this.state.account).toString();
+  const profile = Box.get(this.state.account);
   //const profile = box.public.all();
+  //const profile = prof.public.get('name');
   this.setState({ profile });
   console.log(profile)
   this.setState({ loading: false }) 
 }
-async getSpace(){
-  const box = Box.openBox(this.state.account, window.ethereum, {Ipfs})
-  //await box.syncDone
+async getBox(){
+  const box = Box.create()
+  await box.syncDone
   console.log(box)
 }
 
@@ -195,7 +244,7 @@ async connectWeb3() {
 
 
 
-async createDatabase() {
+/*async createDatabase() {
   //const name = `Web3Art`;
   this.setState({ loading: true });
   // Create IPFS instance
@@ -225,7 +274,7 @@ async createDatabase() {
   return db;*/
   
   /**/
-}
+//}
 /*createProject = (name) => {
   this.state.w3irds.methods.newProject(name).send({ from: this.state.account })
   .once('receipt', (receipt)=>{
@@ -244,12 +293,12 @@ async createProject(name){
     //await updateProjectByHash(hash, project)
     return
   }*/
-  this.setState({loading: true})
+  /*this.setState({loading: true})
   const pr1 = await this.state.db.put({_id: `${this.state.hash}`, doc: `${name}`, age: 0 })
   .then(() => this.state.db.get('hash'))
   .then((value) => console.log(value))
   this.setState({loading: false})
-  return pr1
+  return pr1*/
 }
 
 //

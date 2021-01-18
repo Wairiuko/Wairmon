@@ -3,18 +3,18 @@ import '../App.css'
 
 //import {NewProject} from './newpieceplease'
 //import NewPiecePlease from './newpieceplease'
-const IPFS = require('ipfs')
-const OrbitDB = require('orbit-db')
+//const IPFS = require('ipfs')
+//const OrbitDB = require('orbit-db')
 // Create IPFS instance
-const initIPFSInstance = async () => {
+/*const initIPFSInstance = async () => {
     return await IPFS.create({ repo: "./artwork" });
   };
-  
+  */
  
 
 
 class Static extends Component {
-    async newProject(){
+    /*async newProject(){
         initIPFSInstance().then(async ipfs => {
           const orbitdb = await OrbitDB.createInstance(ipfs);
         
@@ -35,7 +35,7 @@ class Static extends Component {
           const result = db.iterator({ limit: -1 }).collect();
           console.log(JSON.stringify(result, null, 2));
         });
-      }
+      }*/
       async componentDidMount(){
           //await this.newProject()
       }

@@ -16,7 +16,7 @@ var base64 = localStorage.getItem("imgCanvas")
 //const web3 = new Web3(Web3.givenProvider)
 //Declare IPFS
 //const Room = require('ipfs-pubsub-room')
-export async function dbInstance(){
+/*export async function dbInstance(){
 const IPFS = require('ipfs');
 const OrbitDB = require('orbit-db');
   // Create IPFS instance
@@ -67,7 +67,7 @@ const optionsToWrite = {
 };
 const db = await orbitdb.docs('test-db', optionsToWrite);*/
 
-}
+//}
 /*const ipfsClient = require('ipfs-http-client')
 const IPFS = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
 */
@@ -116,7 +116,7 @@ class Home extends Component {
     
   }) */
   
-  dbInstance();
+  //dbInstance();
   
     //const room = new Room(ipfs, `${name}`);
   console.log(`${name}`)
