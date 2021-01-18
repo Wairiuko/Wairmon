@@ -1,5 +1,5 @@
-// SPDX-License-Indentifier: GPL-3.0
-pragma solidity ^0.7.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.5.0 <0.8.0;
 
 contract W3arts {
   uint public artworkCount = 0;
@@ -33,10 +33,7 @@ contract W3arts {
        bool purchased
     );
 
-  constructor() public {
-    name = "W3arts";
-  }
-
+  
   function createArtwork(string memory _artworkHash, uint _price, string memory _title, string memory _description) public {
     // Make sure the artwork hash exists
     require(bytes(_artworkHash).length > 0);
@@ -76,7 +73,7 @@ contract W3arts {
         // update the artwork 
         artworks[_id] = _artwork;
         //pay the seller by sending them Ether
-        address(_creator).transfer(msg.value);
+        (_creator).transfer(msg.value);
         //trigger an event
         emit ArtworkPurchased(artworkCount, _artwork.hash, _artwork.price, msg.sender, true);
     }

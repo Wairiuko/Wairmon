@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import w3irds from '../w3irds.png';
 import {Link} from 'react-router-dom';
-import Web3Modal from 'web3modal'
-import Web3 from 'web3';
+//import Web3Modal from 'web3modal'
+//import Web3 from 'web3';
 
 class Navbar extends Component {
 
@@ -22,10 +22,14 @@ class Navbar extends Component {
             <small className="text-secondary">
               {//<button onClick={this.props.connect}>Connect</button>
               }
-              {this.props.isLoggedIn ? <small id="account">{this.props.account
-              }</small>:<button className="btn btn-secondary btn-sm"  onClick={this.props.connect}>
-              Connect
-            </button>}
+              {//this.props.isLoggedIn ? 
+              <small id="account">{this.props.account
+              }</small>
+              //:
+              //<button className="btn btn-secondary btn-sm"  onClick={this.props.connect}>
+              //Connect
+            //</button>
+            }
               {/*<button className="btn btn-primary btn-sm" id="btn-connect" onClick={this.props.connect}>
               {this.props.isLoggedIn ? `Disconnect` : `Connect Wallet`}
             </button>

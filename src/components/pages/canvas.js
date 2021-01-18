@@ -50,6 +50,7 @@ class Canvas extends Component{
         }
         this.img2.src = localStorage.getItem("imgBack");
     }
+    
 }
     save(){
         //this.saving = true;
@@ -178,6 +179,7 @@ class Canvas extends Component{
         //this.ctx.fillRect (0, 0, this.canvas.width, this.canvas.height)
         this.saveLocal();
         
+        
     }
     render(){
         return(
@@ -185,7 +187,7 @@ class Canvas extends Component{
             <SplitPane split="vertical" minSize="50%" style={{overflow: 'auto', position: 'relative'}}>
                 
             <Fragment>
-                <h3 style={{textAlign: 'center', color: 'black'}}>2D</h3>
+                <br/>
                 
                     <div id="main">
                      {/*<button onClick={this.saveLocal}>View Saved</button>*/}
@@ -222,7 +224,7 @@ class Canvas extends Component{
             </Fragment>
            
             <Fragment>
-                <h3 style={{textAlign: 'center', color: 'black'}}>3D</h3>
+                <br/>
                 <div id="main">
                     <ThreeD/>
                 </div>

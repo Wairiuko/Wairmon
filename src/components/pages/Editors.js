@@ -34,7 +34,7 @@ const Editor = ({ mode, onChange, value, title, height }) => {
                 showGutter={true}
                 tabSize={2}
                 height={height}
-                setOptions={{ useWorker : true }}
+                setOptions={{ useWorker : false }}
                 />
             </div>
        

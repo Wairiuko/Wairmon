@@ -21,7 +21,7 @@ const style ={ height: 540, width: 960};
 class Scene extends React.Component{
  
     componentDidMount(){
-        var renderer, camera, geometry, texture, mesh, scene, controls, backmesh ;
+        var renderer, camera, geometry, texture, mesh, scene, controls ;
         var width = this.mount.clientWidth;
         var height = this.mount.clientHeight;
         //var size = 256;
