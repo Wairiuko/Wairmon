@@ -16,6 +16,7 @@ import Artwork from './pages/Artwork';
 import Project from './pages/project';
 //import ProjectForm from './pages/Form';
 import Box from '3box';
+import Emoji from './pages/Emoji';
 //import { CullFaceNone } from 'three';
 //const Box = require('../lib/3box.min.js')
  //Declare IPFS
@@ -419,7 +420,11 @@ async createProject(name){
   }*/
 
   render() {
+    if(!this.state.account){
+      return <><h1><Emoji symbol="👋"/>Hi there! Please connect your wallet to continue <Emoji symbol="😊"/></h1></>
+    }
     return (
+      
       <>
       {this.state.loading ?<div id="loader"><img alt="Loading..." src={loader}/></div>
             :

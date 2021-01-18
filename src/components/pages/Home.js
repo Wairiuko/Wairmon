@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
+import Emoji from './Emoji';
 
 var base64 = localStorage.getItem("imgCanvas")
 
@@ -225,7 +226,7 @@ class Home extends Component {
           </div>
           <div className="col-md-2  overflow-auto text-center" style={{ maxHeight: '768px', minWidth: '200px' }}>
             
-            <Link to="project"><h5>+</h5></Link>
+            <Link to="project"><h5><Emoji symbol="➕"/></h5></Link>
             <form onSubmit={(event) => {
               event.preventDefault()
               const name = this.projectName.value
