@@ -14,7 +14,7 @@ import Static from './pages/static';
 import Home from './pages/Home';
 import Artwork from './pages/Artwork';
 import Project from './pages/project';
-import ProjectForm from './pages/Form';
+//import ProjectForm from './pages/Form';
 import Box from '3box';
 //import { CullFaceNone } from 'three';
 
@@ -27,7 +27,6 @@ const OrbitDB = require('orbit-db');
  const year = new Date().getFullYear();
 // Configuration for IPFS instance
 // Create IPFS instance
-
 const ipfsConfig = {
   repo: '/artwork',
   EXPERIMENTAL: {
@@ -384,7 +383,6 @@ async createProject(name){
                   </React.Fragment>
                 )}></Route>
                     <Route path='/static' component={Static}></Route>
-                    <Route path='/ProjectForm' component={ProjectForm}></Route>
                   <Route path='/artwork' component={Artwork}></Route>
                   <Route path='/project' component={Project}></Route>
                 <Route path='/project/:title' component={Project}></Route>
