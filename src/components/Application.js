@@ -87,9 +87,9 @@ constructor(props){
     //connect: false,
     loading: true,
     needWeb3: false,
-    space: null,
-    profile: null,
-    box: null
+    //space: null,
+    //profile: null,
+    //box: null
   }
 
   this.connectWeb3 = this.connectWeb3.bind(this)
@@ -99,15 +99,28 @@ constructor(props){
 }
 
 async componentDidMount(){
-  await this.getAddress()
-  const box = await Box.openBox(this.state.account, window.ethereum);
+  
+  /*const box = await Box.openBox(this.state.account, window.ethereum);
   await box.syncDone;
   const space = box.openSpace('web-three-art');
   this.setState({ space, box });
   const config = await Box.getConfig(this.state.account)
   console.log(config)
   //await this.connectWeb3();
-  //await this.createDatabase();
+  //await this.createDatabase();*/
+  const box = await Box.create(window.ethereum);
+  await this.getAddress()
+
+    if (this.state.accounts) {
+      // Now MetaMask's provider has been enabled, we can start working with 3Box
+      await box.auth(['web3Art'], {
+        address : this.state.accounts[0]
+      })
+      // Opens the space we are using for the TODO app
+      const space = await box.openSpace('web3Art')
+      console.log(space)
+      this.setState({ space })
+    }
   this.setState({loading: false})
 }
 async getAddress(){
@@ -117,7 +130,7 @@ async getAddress(){
   } else {
     window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
     const accounts = await window.ethereum.enable();
-    this.setState({ account: accounts[0] });
+    this.setState({ accounts });
     //this.setState({ loading: false })
   }
 }
