@@ -6,7 +6,7 @@ import { useDebounce } from "./useDebounce";
 import Canvas from './canvas';
 import useLocalStorage from './localstorage';
 import Editable from './Editable';
-import {Button, Navbar} from 'react-bootstrap';
+//import {Button, Navbar} from 'react-bootstrap';
 
 
 export const Pen = ()=>{
@@ -203,10 +203,6 @@ back = (e) => {
         //const{values:{projectName, projectDescription}} = this.props;
         return(
             <>
-            <Navbar sticky="top">
-            <Button onClick={this.saveAndContinue}>Submit</Button>
-            </Navbar>
-            &nbsp;
             
             <InlineInfo/>
     
