@@ -79,9 +79,10 @@ savePng(){
     a.click();
     document.body.removeChild(a);
     //this.setState({saving: false})
-    localStorage.removeItem('imgCanvas');
+    //localStorage.removeItem('imgCanvas');
   
 }
+
     save(){
         //this.saving = true;
         const dataBack = this.canvas2.toDataURL("image/png");
@@ -215,14 +216,15 @@ savePng(){
     render(){
         return(
             
-            <SplitPane split="vertical" minSize="50%" style={{overflow: 'auto', position: 'relative'}}>
+            <SplitPane split="vertical" minSize="60%" style={{overflow: 'auto', position: 'relative'}}>
                 
             <Fragment>
                 <br/>
                 
                     <div id="main">
                      {/*<button onClick={this.saveLocal}>View Saved</button>*/}
-                    <button onClick={this.savePng}>{this.state.saving ? "Saving" : "Save"}</button> 
+                     <button onClick={this.save}>{this.state.saving? "Saving..." : "Save"}</button>
+                    <button onClick={this.savePng}>{this.state.saving ? "Saving.." : "Save As"}</button> 
                      <label htmlFor="color"><small>Pallete</small></label>
                      <input type="color" id="color" ref={(ref) => (this.colorInput = ref)} onChange={this.colorSet}/>
                      <label htmlFor="background"><small>Background</small></label>
