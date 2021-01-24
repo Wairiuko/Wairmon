@@ -173,34 +173,11 @@ export const InlineStats = () => {
     )
 }
 class Project extends Component{
-constructor(props){
-    super(props)
-    this.state = {
-        projects: []
-    }
-}
-  async componentDidMount(){
-      //await 
-  } 
-  async loadProject(){
 
-  }
-  saveAndContinue = (e) =>{
-    e.preventDefault()
-    this.props.nextStep()
-}
-back = (e) => {
-    e.preventDefault();
-    this.props.prevStep();
-}
-
+ 
 
     render(){
-        //const inputRef = useRef();
-        //const [title, setTitle] = useLocalStorage("projectName", ""); 
-        //const textareaRef = useRef();
-        //const [description, setDescription] = useLocalStorage("description", "");
-        //const{values:{projectName, projectDescription}} = this.props;
+        
         return(
             <>
             
@@ -220,7 +197,7 @@ back = (e) => {
             </SplitPane>
             
             <InlineStats/>
-    
+            
            </>
         );
     }

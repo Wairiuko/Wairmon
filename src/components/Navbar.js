@@ -10,11 +10,19 @@ class Navbar extends Component {
   render() {
    
     return (
+      <div className="pos-f-t">
+      <div className="collapse" id="navbarToggleExternalContent">
+        <div className="bg-dark p-4">
+          <h4 className="text-white">Collapsed content</h4>
+          <span className="text-muted">Toggleable via the navbar brand.</span>
+        </div>
+      </div>
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow text-monospace">
         <Link
-          to ='/home'
+          to ='/'
+          className="navbar-brand"
         >
-          <img src={w3irds} width="30" height="30" className="d-inline-block align-top" alt="" />
+          <img src={w3irds} width="30" height="30" className="d-inline-block align-top" alt="" /> Web3Art
           &nbsp;
         </Link>
         <ul className="navbar-nav px-3">
@@ -52,7 +60,14 @@ class Navbar extends Component {
             }
           </li>
         </ul>
+       
+        {/*
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+        */}
       </nav>
+      </div>
     );
   }
 }

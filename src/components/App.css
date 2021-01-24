@@ -1,9 +1,10 @@
 /* Styles go here */
 body {
 	margin: 0;
-	background-image:linear-gradient( rgb(10, 134, 236), rgb(255, 255, 255));
-    color: #fff;
-	background-repeat: no-repeat;
+	background-image:linear-gradient( rgb(3, 32, 56), rgb(0, 0, 0));
+	/*background: '#999';*/
+    color: rgb(255, 255, 255);
+	background-repeat: repeat;
 	margin-top: 50px;
 	margin-bottom: 100px;
 	font-family: Monospace;
@@ -29,9 +30,7 @@ button {
 canvas {
 	display: block;
 }
-#info, #stats{
-	color: #000000;
-}
+
 #info {
 	position: absolute;
 	top: 20px;
@@ -71,9 +70,7 @@ canvas {
 	text-align: center;
 	background-color: #000;
 }
-#static{
-	color: darkolivegreen;
-}
+
 #footer{
 	color: #000;
 	position: fixed;

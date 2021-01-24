@@ -4,12 +4,12 @@ pragma solidity >=0.5.0 <0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/utils/SafeCast.sol";
+//import "@openzeppelin/contracts/math/SafeMath.sol";
+//import "@openzeppelin/contracts/utils/SafeCast.sol";
 
 contract W3irds is ERC721, Ownable{
-    using SafeMath for uint;
-    using SafeCast for uint;
+    //using SafeMath for uint;
+    //using SafeCast for uint;
 
     //string public name = "W3irds Art";
     //string [] public projects;
@@ -17,21 +17,16 @@ contract W3irds is ERC721, Ownable{
         struct Project {
             //Art details
             uint id;
-            uint lifecycle;
-            //Initial details
+            //Name
             string name;
-            uint8 age;
-            uint8 scope;
-            uint8 state;
-            //Attributes
-            uint8 technique;
-            uint8 aesthetics;
-            uint8 usage;
-            uint8 popularity;
+            //DB Address
+            string dbaddress;
+            //timestamp??
+            string timestamp;
             //ownership
             address payable creator;
-            //enlisted
-            bool enlistedProjects;
+            //purchased
+            bool purchased;
         }
         //List of all projects
         Project[] public projects;
@@ -41,32 +36,24 @@ contract W3irds is ERC721, Ownable{
 
     }
     uint public projectCount = 0;
-    uint private lifecycle = 100;
-    uint8 private age = 0;
-    uint8 private scope = 1;
-    uint8 private state = 255;
-    uint8 private technique = 1;
-    uint8 private aesthetics = 1;
-    uint8 private usage = 2;
-    uint8 private popularity = 1;
-        
-        
+      
     //Create new project
         function newProject(
-            string memory _name
+            string memory _name,
+            string memory _dbaddress,
+            string memory _timestamp
             //address _creator
         ) public returns (uint)
         {
             projectCount++;
             uint id = projects.length;
             projects.push(
-                Project(projectCount, lifecycle, _name, age, scope, state, technique, aesthetics, usage,
-                        popularity, msg.sender, false)
+                Project(projectCount, _name, _dbaddress, _timestamp, msg.sender, false)
             );
             _safeMint(msg.sender, id);
             return id;
         }
-
+/*
          //Cast and add a uint8 to a uint8
         function castAdd8(uint8 _a, uint8 _b) internal pure returns (uint8){
             return uint(_a).add(uint(_b)).toUint8();

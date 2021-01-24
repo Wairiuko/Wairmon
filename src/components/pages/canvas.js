@@ -9,7 +9,11 @@ import ThreeD from './3dcanvas';
 class Canvas extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            saving: false
+        }
         this.save = this.save.bind(this);
+        this.savePng = this.savePng.bind(this);
         this.reset = this.reset.bind(this);
         this.colorSet = this.colorSet.bind(this);
         this.brushResize = this.brushResize.bind(this);
@@ -20,7 +24,7 @@ class Canvas extends Component{
         this.endPaintEvent = this.endPaintEvent.bind(this);
         //this.saveLocal = this.saveLocal.bind(this);
     }
-    saving = false;
+    
     isPainting = false;
     userStrokeStyle = '#EE92C2';
     guestStrokeStyle = '#F0c987';
@@ -51,6 +55,32 @@ class Canvas extends Component{
         this.img2.src = localStorage.getItem("imgBack");
     }
     
+}
+savePng(){
+    // event handler for the save button
+
+    // retrieve the canvas data
+    this.setState({saving: true});
+    var canvasContents = this.canvas.toDataURL('image/png'); // a data URL of the current canvas image
+    /*
+    var data = { image: canvasContents, date: Date.now() };
+    var string = JSON.stringify(data);
+  
+    // create a blob object representing the data as a JSON string
+    var file = new Blob([string], {
+      type: 'application/octet-stream'
+    });
+    */
+    // trigger a click event on an <a> tag to open the file explorer
+    var a = document.createElement('a');
+    a.href = canvasContents.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');;
+    a.download = 'w3artproject.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    //this.setState({saving: false})
+    localStorage.removeItem('imgCanvas');
+  
 }
     save(){
         //this.saving = true;
@@ -121,6 +151,7 @@ class Canvas extends Component{
     endPaintEvent() {
         if(this.isPainting) {
             this.isPainting = false;
+            this.save();
             //this.saveLocal();
          }
     }    
@@ -191,15 +222,15 @@ class Canvas extends Component{
                 
                     <div id="main">
                      {/*<button onClick={this.saveLocal}>View Saved</button>*/}
-                    <button onClick={this.save}>{this.saving ? "Saving..." : "Save"}</button> 
-                     <label htmlFor="color"><small style={{color: 'black'}}>Pallete</small></label>
+                    <button onClick={this.savePng}>{this.state.saving ? "Saving" : "Save"}</button> 
+                     <label htmlFor="color"><small>Pallete</small></label>
                      <input type="color" id="color" ref={(ref) => (this.colorInput = ref)} onChange={this.colorSet}/>
-                     <label htmlFor="background"><small style={{color: 'black'}}>Background</small></label>
+                     <label htmlFor="background"><small>Background</small></label>
                      <input type="color" id="background" ref={(ref) => (this.fillCanvas = ref)} onChange={this.colorCanvas}/>
                      {/*<Picker/>*/}
-                     <label htmlFor="size"><small style={{color: 'black'}}>Brush Size</small></label>
+                     <label htmlFor="size"><small>Brush Size</small></label>
                      <input type="range" id="size" min="1" max="100" ref={(ref) => (this.brushSize = ref)} onChange={this.brushResize}/>
-                     <label htmlFor="opacity"><small style={{color: 'black'}}>Opacity</small></label>
+                     <label htmlFor="opacity"><small>Opacity</small></label>
                      <input type="range" min="0" max="100" ref={(ref) => (this.opacity = ref)} onChange={this.changeOpacity}/>
                      {/*<button onClick={this.reset}>Reset</button>*/}
                     
