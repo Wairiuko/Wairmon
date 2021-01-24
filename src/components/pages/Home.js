@@ -60,6 +60,7 @@ createProject = async (name) => {
               <div className="embed-responsive">
               {//this.props.completedProjects<1 ?<p>No complete projects yet. Please create a new project or finish one.</p>
               //:
+              
               <Container>
               {/*<div className="embed-responsive embed-responsive-16by9" style={{ maxHeight: '768px'}}>*/}
               <Row lg={5} md={4} sm={3} xl={2} xs={1}>
@@ -104,12 +105,13 @@ createProject = async (name) => {
           </div>
           <div className="col-md-2 overflow-auto text-center" style={{ maxHeight: '768px', minWidth: '200px' }}>
             
-            <Link to="project"><h5><Emoji symbol="➕"/></h5></Link>
+            <Link to="project"><h5><Emoji symbol="➕"/>Try it here<Emoji symbol="🤏"/></h5></Link>
             <form onSubmit={(event) => {
               event.preventDefault()
               const name = this.projectName.value
-              this.createProject(name)
-            }} >
+              //this.createProject(name)
+            }}
+            >
               
               {/*<label htmlFor='preview' className="btn  btn-dark btn-block btn-sm"> Choose Preview</label>
               <input type='file' accept=".mp4, .mkv, .ogg, .wmv, .mov, .png, .jpeg, .jpg"  id="preview" onChange={this.props.captureFile} style={{ width: '250px' }}/>*/}
