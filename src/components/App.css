@@ -29,10 +29,11 @@ button {
 
 canvas {
 	display: block;
+	cursor: crosshair;
 }
 
 #info {
-	position: absolute;
+	position: fixed;
 	top: 20px;
 	width: 100%;
 	padding: 10px;
@@ -40,16 +41,37 @@ canvas {
 	text-align: center;
 	text-transform: uppercase;
 	z-index: 1; /* TODO Solve this in HTML */
+	background-color: #333642;
+}
+#artistname{
+	position: fixed;
+	top: 70px;
+	width: 100%;
+	background-color: #2e1723;
+	box-sizing: border-box;
+	text-align: center;
+	z-index: 1;
 }
 
 #stats {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	width: 100%;
 	padding: 10px;
 	box-sizing: border-box;
 	text-align: center;
+	background-color: #333642;
 	/*z-index: 99999;*/
+}
+#desc {
+	position: fixed;
+	bottom: 20px;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: center;
+	overflow: auto;
+	background-color: #333642;
 }
 #guide {
 	position: absolute;
@@ -58,6 +80,10 @@ canvas {
 	padding: 10px;
 	box-sizing: border-box;
 	/*z-index: 99999;*/
+}
+#prev{
+	text-transform: uppercase;
+	text-align: center;
 }
 #donations {
 	width: 100%;

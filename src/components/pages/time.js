@@ -34,5 +34,5 @@ export const timeSince = (date) => {
     if (interval > 1) return `${h}:${m}${dd}`;
     if (interval === 1) return `${h}:${m}${dd}`;
   
-    return `${h}:${m}${dd}`;
+    return `${dateFormat} ${h}:${m}${dd}`;
   };

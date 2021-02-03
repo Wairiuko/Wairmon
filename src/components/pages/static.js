@@ -49,7 +49,7 @@ class Static extends Component {
           var height = window.innerHeight;
           var container = document.getElementById('container');
           //var cube = new THREE.BoxGeometry(20, 14, 20, 5, 3, 5)
-          var cube2 = new THREE.SphereGeometry(700,36,36)
+          var sphere = new THREE.SphereGeometry(700,36,36)
           //var cube3 = new THREE.TorusGeometry()
           var sides = [];
           
@@ -77,7 +77,7 @@ class Static extends Component {
             clone.position.set(1, 1, 1);
             //clone.scale(1, -1, 1);
             scene.add(clone);
-            createSides(string, cube2);
+            createSides(sphere);
             animate();
             //window.addEventListener('resize', onWindowResize, false);
             //container.addEventListener('resize', onWindowResize, false);
@@ -117,10 +117,10 @@ class Static extends Component {
             object.name = 'image_test';
             return object;
           }
-          function createSides(i, geometry) {
+          function createSides(geometry) {
 
             // merge these, or compensate the offset
-            for ( i = 0 ; i < geometry.faces.length; i += 2) {
+            for ( var i = 0 ; i < geometry.faces.length; i += 2) {
     
                 // create a new object
                 var side = createCSS3DImage(i);
@@ -196,8 +196,9 @@ class Static extends Component {
               <div id="static"></div>
             </div>
             {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
-            {this.props.isLoggedIn ? <span></span> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
-              <button className="btn-dark" onClick = {this.props.connectWeb3}>Get Started</button>
+            {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
+              <Link to='home'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
+              <button className="btn-dark" onClick = {this.getStarted}>Get Started</button>
               <br/>
             </div>
            }

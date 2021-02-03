@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {v4 } from 'uuid';
-import SplitPane from 'react-split-pane';
-import ThreeD from './3dcanvas';
+//import SplitPane from 'react-split-pane';
+//import ThreeD from './3dcanvas';
+//import { local } from 'web3modal';
 //import Artwork from './Artwork';
 //import Picker from './Picker';
 //import { TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
@@ -14,6 +15,7 @@ class Canvas extends Component{
         }
         this.save = this.save.bind(this);
         this.savePng = this.savePng.bind(this);
+        this.saveToBack = this.saveToBack.bind(this);
         this.reset = this.reset.bind(this);
         this.colorSet = this.colorSet.bind(this);
         this.brushResize = this.brushResize.bind(this);
@@ -56,12 +58,66 @@ class Canvas extends Component{
     }
     
 }
-savePng(){
+ saveToBack(){
+
+    var canmain = this.canvas;
+    var canback = this.canvas2;
+    try{
+    //var ctx = this.canvas.getContext('2d')
+    var ctx2 = canback.getContext('2d')
+    
+      this.img.onload = () => {
+        //this.setState({saving: true})
+        ctx2.drawImage(this.img, 0, 0);
+        this.save()
+        //this.ctx2.update();
+        
+    }
+    this.img.src = canmain.toDataURL('image/png');
+    
+    
+
+    //localStorage.setItem('mainCanvas', )
+     // a data URL of the current canvas image
+
+    
+    
+    }catch (error){
+      
+        window.alert("there was a problem saving your canvas"+ error)
+
+     // a data URL of the current canvas image
+    }
+}
+saveMain(){
+    //var canvasContents =  this.canvas2.toDataURL('image/png'); // a data URL of the current canvas image
+    var can = localStorage.getItem('imgBack')
+    //localStorage.setItem('mainCanvas', canvasContents)
+    var a = document.createElement('a');
+    a.href = can.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');;
+    a.download = 'w3artproject.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+        
+}
+
+
+
+
+async savePng(){
     // event handler for the save button
 
     // retrieve the canvas data
     this.setState({saving: true});
-    var canvasContents = this.canvas.toDataURL('image/png'); // a data URL of the current canvas image
+    //const img = new Image();
+    //await this.saveToBack();
+    
+    //const dataMain = this.canvas.toDataURL('image/png');
+   
+   // var canvasContents =  this.canvas2.toDataURL('image/png'); // a data URL of the current canvas image
+
+    //localStorage.setItem('mainCanvas', canvasContents)
     /*
     var data = { image: canvasContents, date: Date.now() };
     var string = JSON.stringify(data);
@@ -71,13 +127,15 @@ savePng(){
       type: 'application/octet-stream'
     });
     */
+    var canback = localStorage.getItem('imgBack')
     // trigger a click event on an <a> tag to open the file explorer
     var a = document.createElement('a');
-    a.href = canvasContents.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');;
+    a.href = canback.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');;
     a.download = 'w3artproject.png';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    
     //this.setState({saving: false})
     //localStorage.removeItem('imgCanvas');
   
@@ -87,12 +145,13 @@ savePng(){
         //this.saving = true;
         const dataBack = this.canvas2.toDataURL("image/png");
         const dataURL = this.canvas.toDataURL("image/png");
+        
     if((localStorage)!= null)
     {//check if the browser supports localStorage
         //store data
         localStorage.setItem("imgBack", dataBack); 
         localStorage.setItem("imgCanvas", dataURL);
-        console.log("Saving...");
+        //console.log("Saving...");
         this.saving = true;
     }
     else{
@@ -100,6 +159,7 @@ savePng(){
     }
     //this.saving = false;
 }
+
     reset(){
         //clear rect
         //ADD MODAL TO CHOOSE CONFIRM
@@ -153,7 +213,7 @@ savePng(){
         if(this.isPainting) {
             this.isPainting = false;
             this.save();
-            //this.saveLocal();
+            //this.saveToBack();
          }
     }    
     paint(prevPos, currPos, color) {
@@ -167,6 +227,7 @@ savePng(){
         this.ctx.moveTo(x, y);
         this.ctx.lineTo(offsetX, offsetY);
         this.ctx.stroke();
+        //this.ctx.scale(2, 2)
         //this.ctx.globalCompositeOperation = 'destination-in';
         this.prevPos = { offsetX, offsetY};
 
@@ -197,34 +258,39 @@ savePng(){
         this.line = [];
     }*/
     componentDidMount(){
-        this.canvas.width = 960;
-        this.canvas.height = 540;
-        this.canvas2.width = 960;
-        this.canvas2.height = 540;
+        this.canvas.width = 1920/2;
+        this.canvas.height = 1080/2;
+        this.canvas2.width = 1920/2;
+        this.canvas2.height = 1080/2;
         this.ctx2 = this.canvas2.getContext('2d');
         this.ctx = this.canvas.getContext('2d');
         this.ctx.lineWidth = this.brush;
         this.ctx.lineJoin = 'round';
         this.ctx.lineCap = 'round';
+        this.canvas.addEventListener('touchstart', this.onMouseDown, false);
+        this.canvas.addEventListener('touchmove', this.onMouseMove, false);
+        this.canvas.addEventListener('touchend', this.endPaintEvent, false)
         //this.fill = this.fillCanvas.value;
         //this.ctx.fillStyle = this.fill;
         //this.ctx.fillRect (0, 0, this.canvas.width, this.canvas.height)
         this.saveLocal();
+        //this.saveToBack();
         
         
     }
     render(){
         return(
             
-            <SplitPane split="vertical" minSize="60%" style={{overflow: 'auto', position: 'relative'}}>
-                
-            <Fragment>
-                <br/>
                 
                     <div id="main">
                      {/*<button onClick={this.saveLocal}>View Saved</button>*/}
-                     <button onClick={this.save}>{this.state.saving? "Saving..." : "Save"}</button>
-                    <button onClick={this.savePng}>{this.state.saving ? "Saving.." : "Save As"}</button> 
+                     {/*<button onClick={this.saveToBack}>{this.state.saving? "Saving..." : "Save"}</button>*/}
+                    <button onClick={(e) => 
+                        { e.preventDefault(); 
+                        this.saveToBack();
+                        //this.saveMain();
+                        }}>{this.state.saving ? "Saving.." : "Save final"}</button> 
+                    <button onClick={this.savePng}>§</button>
                      <label htmlFor="color"><small>Pallete</small></label>
                      <input type="color" id="color" ref={(ref) => (this.colorInput = ref)} onChange={this.colorSet}/>
                      <label htmlFor="background"><small>Background</small></label>
@@ -253,16 +319,7 @@ savePng(){
                         
                     </div>
                         </div>
-                
-            </Fragment>
-           
-            <Fragment>
-                <br/>
-                <div id="main">
-                    <ThreeD/>
-                </div>
-            </Fragment>
-            </SplitPane>
+               
             
         );
     }

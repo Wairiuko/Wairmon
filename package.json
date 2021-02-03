@@ -22,6 +22,7 @@
     "dotenv": "^8.2.0",
     "identicon.js": "^2.3.3",
     "ipfs": "^0.53.0",
+    "ipfs-http-client": "^48.2.2",
     "orbit-db": "^0.26.0",
     "react": "^16.13.1",
     "react-ace": "^9.2.1",
@@ -32,6 +33,7 @@
     "react-split-pane": "0.1.92",
     "styled-components": "^5.2.1",
     "three": "^0.123.0",
+    "three.map.control": "^1.6.0",
     "truffle": "^5.1.58",
     "truffle-hdwallet-provider-privkey": "^0.3.0",
     "uuid": "^8.3.2",
@@ -56,6 +58,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.5.0",
     "gh-pages": "^2.2.0"
   },
   "main": "index.js",

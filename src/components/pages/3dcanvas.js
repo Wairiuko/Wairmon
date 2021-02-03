@@ -28,16 +28,16 @@ class Scene extends React.Component{
         var height = this.mount.clientHeight;
         var container = document.getElementById('container');
         var img = new Image();
-        var sides = [];
-        var cube2 = new THREE.SphereGeometry(700,12,12);
+        //var sides = [];
+        //var cube2 = new THREE.SphereGeometry(700,12,12);
 
-        var string = '<canvas id="test-canvas"></canvas>'
+        //var string = '<canvas id="test-canvas"></canvas>'
 
         function init(){
             renderer = new CSS3DRenderer();
             renderer.setSize(width, height);
-            renderer.domElement.style.position = "absolute";
-            renderer.domElement.style.top = 0;
+            //renderer.domElement.style.position = "absolute";
+            //renderer.domElement.style.top = 0;
             renderer.domElement.style.backgroundImage = // eslint-disable-next-line
             "url(" + `/screens/starry_background.jpg` + ")";
             container.appendChild(renderer.domElement);
@@ -59,7 +59,7 @@ class Scene extends React.Component{
 
             //createSides(string, cube2)
             animate()
-            window.addEventListener('resize', onWindowResize, false)
+            container.addEventListener('resize', onWindowResize, false)
         }
         function createCSS3DCanvas(canvas){
             var div = document.createElement('div');
@@ -80,7 +80,7 @@ class Scene extends React.Component{
 
             return object;
         }
-        function createSides(i, geometry) {
+        /*function createSides(i, geometry) {
 
             // merge these, or compensate the offset
             for ( i = 0 ; i < geometry.faces.length; i += 2) {
@@ -132,7 +132,7 @@ class Scene extends React.Component{
                 sides.push(side);
             }
             
-        }
+        }*/
         
         function animate(){
             renderer.render(scene, camera);
@@ -144,6 +144,7 @@ class Scene extends React.Component{
             renderer.setSize( width, height );
         }
     init();
+    window.addEventListener('resize', onWindowResize, false)
     }
  /*
     componentDidMount(){
@@ -244,7 +245,7 @@ class Scene extends React.Component{
 
     render() {
         
-        return <div style={style} ref={ref => {this.mount = ref}} id="container"><div id="can3"></div></div>
+        return <div style={style} ref={ref => {this.mount = ref}} id="container"></div>
                 
                 
         };
@@ -261,7 +262,7 @@ class ThreeD extends Component{
                     <button onClick={() => this.setState(state => ({isMounted: !state.isMounted}))}>
                             {isMounted ? "Close" : "Launch"}
                             </button>
-                    {isMounted && <small>Tip: Drag and Drop a 360˙ Photo to change the background, 
+                    {isMounted && <small className="text-secondary"> 
                     Scroll to Zoom, Drag to Rotate, 
                     Shift+Drag to Pan</small>}
                     

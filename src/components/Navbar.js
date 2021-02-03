@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
-import w3irds from '../w3irds.png';
+import wairmon from '../wairmon.png';
 import {Link} from 'react-router-dom';
 //import Web3Modal from 'web3modal'
 //import Web3 from 'web3';
@@ -10,22 +10,22 @@ class Navbar extends Component {
   render() {
    
     return (
-      <div className="pos-f-t">
-      <div className="collapse" id="navbarToggleExternalContent">
-        <div className="bg-dark p-4">
-          <h4 className="text-white">Collapsed content</h4>
-          <span className="text-muted">Toggleable via the navbar brand.</span>
-        </div>
-      </div>
+      
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow text-monospace">
         <Link
           to ='/'
           className="navbar-brand"
         >
-          <img src={w3irds} width="30" height="30" className="d-inline-block align-top" alt="" /> Web3Art
+          <img src={wairmon} width="30" height="30" className="d-inline-block align-top" alt="" /> 
+          Web3Art
+          <small className="text-secondary">{this.props.projectCount}</small>
+          &nbsp;
+           <small className="text-secondary">{this.props.totalSupply}</small>
           &nbsp;
         </Link>
+       
         <ul className="navbar-nav px-3">
+          
           <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
             <small className="text-secondary">
               {//<button onClick={this.props.connect}>Connect</button>
@@ -67,7 +67,7 @@ class Navbar extends Component {
     </button>
         */}
       </nav>
-      </div>
+      
     );
   }
 }
