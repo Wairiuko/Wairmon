@@ -5,16 +5,36 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {CSS3DObject, CSS3DRenderer} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import {withRouter} from 'react-router-dom';
 import Emoji from './Emoji';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Web3Modal from 'web3modal';
+import Web3 from 'web3';
 
 
 
 class Static extends Component {
 
-  getStarted = () => {
-    this.props.history.push('art')
-  }
+  getStarted = async () => {
+    
+  try{const providerOptions = {};
+  const web3Modal = new Web3Modal({
+    network: 'mainnet',
+    cacheProvider: true,
+    providerOptions,
+    theme: 'dark'
+  })
+  const provider = await web3Modal.connect();
+  const web3 = new Web3(provider);
+  const accounts = await web3.eth.getAccounts();
+  //this.setState( { account: accounts[0] });
+  //this.setState({ isLoggedIn: true });
+  //For login **memory
+  window.localStorage.setItem('login', accounts[0])
 
+  this.props.history.push('art')
+}catch (error){
+  window.alert('Oopps there was an error connecting to your wallet'+ error)
+}
+}
    
        componentDidMount(){
           //await this.newProject()
