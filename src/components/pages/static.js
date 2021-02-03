@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 class Static extends Component {
 
   getStarted = () => {
-    this.props.history.push('home')
+    this.props.history.push('art')
   }
 
    
