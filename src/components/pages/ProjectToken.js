@@ -5,8 +5,8 @@ import SplitPane from 'react-split-pane';
 import Canvas from './canvas';
 
 import * as THREE from 'three';
-import Navbar from '../Navbar';
-import NavBottom from '../NavBottom';
+//import Navbar from '../Navbar';
+//import NavBottom from '../NavBottom';
 import Web3 from 'web3';
 import W3irdsTokens from '../../abis/W3irdsTokens.json';
 //import loader from '../../loading.gif';
@@ -28,28 +28,29 @@ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' 
 /******* CREATING A PROJECT NOW COMES HERE THE ONLY CHALLENGE I HAVE IS HAVING TO LOAD BLOCKCHAIN INFO ALL OVER AGAIN and
 of course building a relationship between the data and that in the blockchain */
     
-class Project extends Component{
+class ProjectToken extends Component{
 
     state= {
-        loading: true,
-        w3irdsTokens: null,
-        web3: null,
-        account: '',
+       // loading: true,
+       // w3irdsTokens: null,
+       // web3: null,
+       // account: '',
         buffer: null,
         keeper: null,
         //previewHash: null,
-        mainHash: null
+        mainHash: null,
+        dataMain: []
     }
     
     createOffChainProject =  async () => {
         this.setState({ loading: true })
          //Constants for files
 
-      await this.fetchAccount();
+     // await this.fetchAccount();
 
        var preview;
        var address
-        
+        //let dataMain = [];
        const name = JSON.parse(localStorage.getItem('w3ird-pen-title'));
        const description = JSON.parse(localStorage.getItem('w3ird-pen-description'));
        if (localStorage.getItem('imgBack')!= null)  {
@@ -66,9 +67,12 @@ class Project extends Component{
        const date = new Date();
        const time = timeSince(date);
        const creator = JSON.parse(localStorage.getItem('w3ird-pen-artist'))
+       const mainProject = this.props.w3irdsTokens.methods.tokenURI(this.props.projectID);
+       fetch(mainProject).then(response => {return response.json()}).then(json =>{this.setState({dataMain: [...this.state.dataMain, json]})})
+       //const dataMain = this.props.data;
         //const pen = [html, js, css];
-        const data =  JSON.stringify({project:{title: name, creator: creator, date: time, description: description, image: preview, html: html, js: js, css: css}})
-        localStorage.setItem('mainJson', data);
+        const data =  JSON.stringify({...this.state.dataMain, token:{title: name, creator: creator, date: time, description: description, image: preview, html: html, js: js, css: css}})
+        localStorage.setItem('tokenJson', data);
         
         
         const file = Buffer.from(data);
@@ -94,7 +98,7 @@ class Project extends Component{
                     address = this.state.account
                 }
                  
-                this.state.w3irdsTokens.methods.awardMainProject(address, `https://ipfs.io/ipfs/${ipfsId}` ).send({ from: this.state.account })
+                this.state.w3irdsTokens.methods.awardProjectToken(address, `https://ipfs.io/ipfs/${ipfsId}` ).send({ from: this.state.account })
                 .on('transactionHash', hash => {
                     window.alert('Project minted successfully')
                     //localStorage.clear()
@@ -293,7 +297,7 @@ class Project extends Component{
         return(
             <>
             
-            <Navbar account={this.state.account}/>
+            
            
             <InlineInfo/>
             <InlineProfile/>
@@ -367,10 +371,10 @@ class Project extends Component{
             <InlineStats/>
 
            
-            <NavBottom/>
+            
            </>
         );
     }
 }
 
-export default Project;
+export default ProjectToken;

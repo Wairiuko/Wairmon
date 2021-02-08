@@ -11,13 +11,13 @@ import Image from 'react-bootstrap/Image';
 //import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
 //import Emoji from './Emoji';
-//import {timeSince} from './time';
+import {timeSince} from './time';
 import Web3Modal from 'web3modal';
 //import W3irds from '../../abis/W3irds.json';
 import W3irdsTokens from '../../abis/W3irdsTokens.json';
 import Navbar from '../Navbar';
 import NavBottom from '../NavBottom';
-//import Project from './project';
+import ProjectToken from './ProjectToken';
 //import Splitpane from 'react-split-pane';
 //import ThreeD from './3dcanvas';
 import ProjectView from './ProjectView';
@@ -30,8 +30,8 @@ import SplitPane from 'react-split-pane';
 //const base64 = localStorage.getItem("mainCanvas")
 
   
- //const ipfsClient = require('ipfs-http-client')
- //const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) 
+ const ipfsClient = require('ipfs-http-client')
+ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) 
  //const year = new Date().getFullYear();
 
 
@@ -44,6 +44,7 @@ state ={
   w3irds: null,
   w3irdsTokens: null,
   projects: [],
+  tokens: [],
   totalSupply: 0,
   projectCount: 0,
   projectCreator: null,
@@ -57,12 +58,15 @@ state ={
   projectTitle: null,
   projectDescription: null,
   //projectSpace: null,
+  projectKeeper: null,
+  projectTokens: null,
   projectCreatorAddress: null,
   //projectID: null,
   projectPrice: null,
   buffer: null,
   data: [],
-  allData: [],
+  tokenData: [],
+  proposedKeeper: null,
   ///transfer test
   projectID: null,
   
@@ -121,9 +125,9 @@ async connectWeb3() {
       const totalSupply = await w3irdsTokens.methods.totalSupply().call()
       this.setState({ totalSupply })
       console.log(totalSupply)
-      const price = '3';
-      const pricetest = web3.utils.toWei(price, 'Ether')
-      console.log(pricetest)
+      //const price = '3';
+     // const pricetest = web3.utils.toWei(price, 'Ether')
+      //console.log(pricetest)
 
       /*/tests
       const uri = await w3irdsTokens.methods.tokenURI(1).call()
@@ -138,13 +142,16 @@ async connectWeb3() {
         const project = await w3irdsTokens.methods.projects(i-1).call()
         this.setState({ projects: [...this.state.projects, project]})
          ///TESTING data
+         console.log(project)
         this.setState({ projectHash: project.ipfshash,
                         projectID: project.id,
-                        projectPrice: project.price,
-                        projectCreatorAddress: project.creator
+                        //projectPrice: project.pric,
+                        projectCreatorAddress: project.creator,
+                        projectKeeper: project.keeper,
+                        projectTokens: project.tokens
         
         })
-        console.log(this.state.projectID, this.state.projectPrice)
+        console.log(this.state.projectID, this.state.projectKeeper, this.state.projectTokens)
         console.log(this.state.projectHash)
          fetch(`${project.ipfshash}`)
          .then((response) => {
@@ -154,21 +161,39 @@ async connectWeb3() {
              this.setState({ data: [...this.state.data, json]})
              //this.setState({ })
              console.log(this.state.data)
+            // const data = this.state.data
+          //const tokenData = JSON.stringify({...data, token:{title: '', creator: '', image: '', date: '', description: '', html: '', js: '', css: ''} })
+          //console.log(tokenData)
              this.setState({
-               projectImage: json.image,
-               projectHtml: json.html,
-               projectJs: json.js,
-               projectCss: json.css,
-               projectTime: json.date,
-               projectTitle: json.name,
-               projectDescription: json.description,
-               projectCreator: json.creator
+               projectImage: json.project.image,
+               projectHtml: json.project.html,
+               projectJs: json.project.js,
+               projectCss: json.project.css,
+               projectTime: json.project.date,
+               projectTitle: json.project.title,
+               projectDescription: json.project.description,
+               projectCreator: json.project.creator
              })
 
              //this.state.data.sort((a, b) => (b.date - a.date))
              //this.setState({ loading: false})
              //console.log(this.state.data)
          });
+        
+      }
+      //List tokens and fetch their respective URIS
+      for(var t = 1; t <= totalSupply; t++){
+        const token = await w3irdsTokens.methods.tokenByIndex(t-1).call();
+        this.setState({tokens: [...this.state.tokens, token]});
+        console.log(this.state.tokens)
+        const tokenUris = await w3irdsTokens.methods.tokenURI(t).call();
+        fetch(tokenUris)
+        .then(response =>{
+          return response.json()
+        }).then(json => {
+          this.setState({tokenData: [...this.state.tokenData, json]})
+          console.log(this.state.tokenData)
+        })
         
       }
      //const uri = await w3irdsTokens.methods.tokenURI(1).call()
@@ -257,8 +282,8 @@ async connectWeb3() {
     window.alert('Error connecting to your wallet: ' + err);
   }
 }
-changeCurrentProject(name, image, html, js, css, date, description, creator){
-  this.setState({'projectTitle': name})
+changeCurrentProject(title, image, html, js, css, date, description, creator){
+  this.setState({'projectTitle': title})
   this.setState({'projectImage': image})
   this.setState({'projectHtml': html})
   this.setState({'projectJs': js})
@@ -277,9 +302,26 @@ transfer(from, to, id){
 
 //Mint Test
 awardProject(to, uri){
-  this.state.w3irdsTokens.methods.awardItem(to, uri).send({from: this.state.account}).on('transactionHash', hash => {
-    window.alert("Transfered successfully")
+  to = this.state.proposedKeeper
+  const html = JSON.parse(localStorage.getItem('w3ird-pen-html'));
+  const js = JSON.parse(localStorage.getItem('w3ird-pen-js'));
+  const css = JSON.parse(localStorage.getItem('w3ird-pen-css'));
+  const image = localStorage.getItem('imgCanvas')
+  const date = timeSince(new Date())
+  const data = this.state.data;
+  const tokenData = JSON.stringify({...data, token:{title: "First Token Test", creator: "Serste", image: image, date: date, description: "Token Uri Test", html: html, js: js, css: css} })
+  const file = Buffer.from(tokenData);
+  ipfs.add(file, {progresss: prog => console.log(`TokenJson: ${prog}`)})
+  .then(response => {
+    uri = response.path;
+    this.state.w3irdsTokens.methods.awardProjectToken(to, `https://ipfs.io/ipfs/${uri}`).send({from: this.state.account}).on('transactionHash', hash => {
+      window.alert("Token minted successfully")
+    })
+
+  }).catch(error => {
+    window.alert("Oopps something went wrong, please try again")
   })
+  
 }
 //Transfer to new Keeper Test
 sellProject(to, id){
@@ -317,18 +359,19 @@ buyProject(id, price){
           <>
         
         <small>{this.state.projectCreator} {this.state.projectTime}</small>
-        {this.state.account === this.state.projectCreatorAddress &&
+        {/*this.state.account === this.state.projectCreatorAddress &&
         <form onSubmit={e => {
           e.preventDefault();
-          const address = this.address.value
+          //const address = this.address.value
+         // const id = this.state.projectID
           //this.transfer(this.state.account, address, 1)
-          this.awardProject(address, this.state.projectHash)
+          this.awardProject()
           //this.sellProject(address, 1)
         } }
-        ><input type="text" ref={(input) => { this.address = input }} placeholder="eg. 0xAF78309C17Cb8FE6119Ad8255C155fCc54F116b0" required />
-        <button className="btn-dark" type="submit">Mint/Transfer</button>
+        ><input type="text" ref={(input) => { this.address = input }} onChange={e => {e.preventDefault(); this.setState({proposedKeeper: e.target.value})}}placeholder="eg. 0xAF78309C17Cb8FE6119Ad8255C155fCc54F116b0" required />
+        <button className="btn-dark" type="submit">Mint</button>
 
-      </form>}
+      </form>*/}
       {/*<button className='btn-dark' name={this.state.projectID} value={this.state.projectPrice} onClick={(e) => {
         this.buyProject(e.target.name, e.target.value)
       }}>Buy</button>*/}
@@ -336,7 +379,7 @@ buyProject(id, price){
           minSize="85%"
           split="vertical"
           >
-            
+            <>
                 {<ProjectView
                 projectHash = {this.state.projectHash}
                 data = {this.state.data}
@@ -348,6 +391,19 @@ buyProject(id, price){
                 projectTitle = {this.state.projectTitle}
                 projectDescription = {this.state.projectDescription}
                 />}
+                {/*<ProjectToken
+                style={{visibility: 'hidden'}}
+                projectHash = {this.state.projectHash}
+                data = {this.state.data}
+                projectImage = {this.state.projectImage}
+                projectHtml = {this.state.projectHtml}
+                projectJs = {this.state.projectJs}
+                projectCss = {this.state.projectCss}
+                projectTime = {this.state.projectTime}
+                projectTitle = {this.state.projectTitle}
+                projectDescription = {this.state.projectDescription}
+                />*/}
+                </>
                   
            { //<SplitPane split="vertical" minSize="50%" style={{overflow: 'auto'}}>
              }
@@ -366,7 +422,7 @@ buyProject(id, price){
                       <div className="card mb-4 overflow-auto text-center bg-secondary mx-auto" style={{ width: '175px', position: 'relative'}} key={key}>
                         <div className="card-title bg-dark">
                  
-                <small className="text-white"><b>{json.name
+                <small className="text-white"><b>{json.project.title
                           }</b></small>      
                         </div>
                               
@@ -374,12 +430,12 @@ buyProject(id, price){
                                 <button id="thumbnail" onClick={ (e) => {
                                   e.preventDefault();
                                   //this.linkToProject(project.id, project.name);
-                                   this.changeCurrentProject(json.name, json.image, json.html, json.js, json.css, json.date, json.description, json.creator)
+                                   this.changeCurrentProject(json.project.title, json.project.image, json.project.html, json.project.js, json.project.css, json.project.date, json.project.description, json.project.creator)
                                   }
                                   }
                                   >
                                   <Image
-                                  src = {json.image
+                                  src = {json.project.image
                                   }
                                   alt = 'Preview'
                                   thumbnail
