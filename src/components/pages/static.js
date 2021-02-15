@@ -217,7 +217,7 @@ class Static extends Component {
             </div>
             {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
             {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
-              <Link to='home'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
+              <Link to='art'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               <button className="btn-dark" onClick = {this.getStarted}>Get Started</button>
               <br/>
             </div>

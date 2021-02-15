@@ -26,7 +26,7 @@ contract W3irds is OwnableUpgradeable {
             //Owner??
             address keeper;
            /****I am doing a thing with ProjectTokens instead of price etc.. */
-           uint256 tokens;
+           uint256 tokenId;
 
         }
         //List of all projects
@@ -41,8 +41,8 @@ contract W3irds is OwnableUpgradeable {
     //string private _nameprefix = 'W3art-Project-';
 
     //Events
-    event ProjectCreated(uint256 id, string ipfshash, address creator, address keeper, uint256 tokens );
-    event ProjectKeeperChanged(uint256 id, string ipfshahs, address creator, address keeper, uint256 tokens);
+    event ProjectCreated(uint256 id, string ipfshash, address creator, address keeper, uint256 tokenId );
+    event ProjectKeeperChanged(uint256 id, string ipfshahs, address creator, address keeper, uint256 tokenId);
     event ProjectTokens(uint256 id);
       
     //Create new project
