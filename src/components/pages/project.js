@@ -96,7 +96,8 @@ class Project extends Component{
                  
                 this.state.w3irdsTokens.methods.awardMainProject(address, `https://ipfs.io/ipfs/${ipfsId}` ).send({ from: this.state.account })
                 .on('transactionHash', hash => {
-                    window.alert('Project minted successfully')
+                    window.alert('Project published successfully')
+                    //window.location.reload();
                     //localStorage.clear()
                     
                 })

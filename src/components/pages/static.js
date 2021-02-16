@@ -5,17 +5,15 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {CSS3DObject, CSS3DRenderer} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import {withRouter} from 'react-router-dom';
 import Emoji from './Emoji';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Web3Modal from 'web3modal';
 import Web3 from 'web3';
 
-
-
-class Static extends Component {
-
-  getStarted = async () => {
-    
-  try{const providerOptions = {};
+export const GetStarted = () => {
+ 
+  let history = useHistory();
+  async function handleClick(){
+    try{const providerOptions = {};
   const web3Modal = new Web3Modal({
     network: 'mainnet',
     cacheProvider: true,
@@ -25,16 +23,30 @@ class Static extends Component {
   const provider = await web3Modal.connect();
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
+  //const history = useHistory();
   //this.setState( { account: accounts[0] });
   //this.setState({ isLoggedIn: true });
   //For login **memory
-  window.localStorage.setItem('login', accounts[0])
-
-  this.props.history.push('art')
+  if((localStorage) != null){
+    window.localStorage.setItem('login', accounts[0]);
+    history.push('/art')
+    window.location.reload();
+  }
 }catch (error){
   window.alert('Oopps there was an error connecting to your wallet'+ error)
 }
+  }
+    
+return(
+  <button className="btn-dark" onClick={handleClick}>Get Started</button>
+)
 }
+
+
+class Static extends Component {
+  
+
+  
    
        componentDidMount(){
           //await this.newProject()
@@ -218,7 +230,9 @@ class Static extends Component {
             {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
             {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               <Link to='art'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
-              <button className="btn-dark" onClick = {this.getStarted}>Get Started</button>
+              {/*<button className="btn-dark" onClick={e =>{e.preventDefault(); this.getStarted()}}>Get Started</button>*/}
+              <GetStarted/>
+
               <br/>
             </div>
            }

@@ -17,7 +17,7 @@ import Web3Modal from 'web3modal';
 import W3irdsTokens from '../../abis/W3irdsTokens.json';
 import Navbar from '../Navbar';
 import NavBottom from '../NavBottom';
-import ProjectToken from './ProjectToken';
+//import ProjectToken from './ProjectToken';
 //import Splitpane from 'react-split-pane';
 //import ThreeD from './3dcanvas';
 import ProjectView from './ProjectView';
