@@ -14,6 +14,7 @@ import Static from './pages/static';
 import Home from './pages/Home';
 //import Artwork from './pages/Artwork';
 import Project from './pages/project';
+import SingleProject from './pages/SingleProject';
 //import ProjectForm from './pages/Form';
 //import Box from '3box';
 //import Emoji from './pages/Emoji';
@@ -85,7 +86,7 @@ async determineWeb3(){
             <Switch>{/*Decides which component to show*/}
               {/*<Redirect exact from="/" to="/home" />*/}
                
-                <Route exact path={['/']} render={props =>(
+                <Route exact path='/' render={props =>(
                   <React.Fragment>
                 {this.state.isLoggedIn ? <Redirect exact to='/art'/> :
                 
@@ -117,6 +118,7 @@ async determineWeb3(){
                 {
                   //<Route path='/artwork' component={Artwork}></Route>
                  <Route exact path='/project' component={Project}></Route>
+                 
                     //<React.Fragment>
                      //</React.Fragment> <Project
                     //  isLoggedIn = {this.state.isLoggedIn}
@@ -132,6 +134,11 @@ async determineWeb3(){
                   </React.Fragment>
                 )}></Route> */
                 }
+                <Route exact path="/project/:id" render={props => (
+                  <React.Fragment>
+                    <SingleProject {...props}/>
+                  </React.Fragment>
+                )}></Route>
   
                 </>
                 )} 

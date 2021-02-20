@@ -4,9 +4,14 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {CSS3DRenderer, CSS3DObject} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import SplitPane from 'react-split-pane';
 import { CssEditor, HtmlEditor, JavascriptEditor} from "./Editors";
+//import { useParams } from 'react-router-dom';
 
 const img = new Image();
+export function ProjectTest(props){
+    const date = props.match.params.date;
+    const title = props.match.params.title;
 
+}
 class ProjectView extends Component{
 
 state={
@@ -160,7 +165,14 @@ state={
     container.addEventListener('resize', onWindowResize, false);
 
     }
-render(){
+render()
+
+{
+    
+    //console.log(this.props.match.params);
+    console.log(this.props.data);
+    //var title = this.props.match.params.title;
+    //var project = this.props.data.find(p => p.project.title === title);
     
     return(
         <>

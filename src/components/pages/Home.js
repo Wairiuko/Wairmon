@@ -416,6 +416,7 @@ buyProject(id, price){
                 <div style={{overflow: 'auto', maxHeight: '600px', position: 'absolute'}}>
 
                 {this.state.data.map((json, key) => {
+                  
                 return(
                     
                     
@@ -427,22 +428,24 @@ buyProject(id, price){
                         </div>
                               
                                 
-                                <button id="thumbnail" onClick={ (e) => {
+                                <p style={{cursor: 'pointer'}}id="thumbnail" onClick={ (e) => {
                                   e.preventDefault();
                                   //this.linkToProject(project.id, project.name);
                                    this.changeCurrentProject(json.project.title, json.project.image, json.project.html, json.project.js, json.project.css, json.project.date, json.project.description, json.project.creator)
                                   }
                                   }
                                   >
+                                  {/*<Link to={"/project/" + json.project.date}>*/}
                                   <Image
                                   src = {json.project.image
                                   }
                                   alt = 'Preview'
                                   thumbnail
                                   />
+                                 { /*</Link>*/}
                                     
                                   
-                                  </button>
+                                  </p>
                               {//</Link>
                 }
                               

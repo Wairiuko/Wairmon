@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 const year = new Date().getFullYear();
 class NavBottom extends Component{
 render(){
@@ -10,7 +10,7 @@ render(){
 <span className="text-secondary">Copyright {year} W3irds Art </span>
 &nbsp;
 
-<Link to='/static'>
+<Link to='/static' onClick={e =>{e.preventDefault(); this.props.history.push('/static'); window.location.reload()}}>
       <span className="text-secondary">About </span>
     </Link>
     {/*
@@ -51,4 +51,4 @@ render(){
 );
 }
 }
-export default NavBottom;
+export default withRouter(NavBottom);

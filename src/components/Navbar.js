@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import wairmon from '../wairmon.png';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 //import Web3Modal from 'web3modal'
 //import Web3 from 'web3';
 
@@ -14,6 +14,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow text-monospace">
         <Link
           to ='/'
+          onClick={e => {e.preventDefault(); this.props.history.push('/'); window.location.reload()}}
           className="navbar-brand"
         >
           <img src={wairmon} width="30" height="30" className="d-inline-block align-top" alt="" /> 
@@ -72,4 +73,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
