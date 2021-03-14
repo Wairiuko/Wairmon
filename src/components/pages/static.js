@@ -1,14 +1,42 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import '../App.css'
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {CSS3DObject, CSS3DRenderer} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import {withRouter} from 'react-router-dom';
-import Emoji from './Emoji';
+//import Emoji from './Emoji';
+import Modal from 'react-bootstrap/Modal';
 import {Link, useHistory} from 'react-router-dom';
 import Web3Modal from 'web3modal';
 import Web3 from 'web3';
 
+
+export const ModalSet = () => {
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  return(
+    <>
+    <button className="btn-dark" onClick={handleShow}>Toss an Artwork</button>
+    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
+      <Modal.Header closeButton>
+        <Modal.Title>What Does This Mean?</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>By tossing an artwork, you agree to showcase your art NFT in our collection and
+        agree that 30% of the sale of that artwork will be used to help a farm in Italy and in Kenya
+        grow trees for to increase carbon absorption in the  world
+      </Modal.Body>
+      <Modal.Footer>
+        <button className="btn-dark" onClick={handleClose}>Close</button>
+        <button className="btn-dark">Continue</button>
+      </Modal.Footer>
+
+    </Modal>
+
+    </>
+  )
+}
 export const GetStarted = () => {
  
   let history = useHistory();
@@ -50,7 +78,7 @@ class Static extends Component {
    
        componentDidMount(){
           //await this.newProject()
-         var string = 
+         /*var string = 
           '<div id="static">'+
               '<h1>A decentralized web app for creating all kinds of art</h1>'+
               '<h2>Built on top of the Ethereum Blockchain network</h2>'+
@@ -75,12 +103,13 @@ class Static extends Component {
               'If and when the creation reaches its maturity level, the creators choose whether or not to put<br/>'+
               'it up for sale. Either way, all history is stored immutably in the blockchain including tips, <br/>'+
               'and donations. This is a great way to sponsor worth causes in the art world.</p>'+
-          '</div>';
+          '</div>';*/
           var renderer, camera, scene, controls;
           var width = window.innerWidth;
           var height = window.innerHeight;
           var container = document.getElementById('container');
           //var cube = new THREE.BoxGeometry(20, 14, 20, 5, 3, 5)
+          
           var sphere = new THREE.SphereGeometry(700,36,36)
           //var cube3 = new THREE.TorusGeometry()
           var sides = [];
@@ -105,16 +134,16 @@ class Static extends Component {
             controls = new OrbitControls(camera, renderer.domElement);
             controls.autoRotate = true;
 
-            var clone = createCSS3DObject(string);
-            clone.position.set(1, 1, 1);
+            //var clone = createCSS3DObject(string);
+            //clone.position.set(1, 1, 1);
             //clone.scale(1, -1, 1);
-            scene.add(clone);
+            //scene.add(clone);
             createSides(sphere);
             animate();
             //window.addEventListener('resize', onWindowResize, false);
             //container.addEventListener('resize', onWindowResize, false);
           }
-          function createCSS3DObject(s){
+          /*function createCSS3DObject(s){
             var div = document.getElementById('static');
             div.innerHTML = s;
             
@@ -126,7 +155,7 @@ class Static extends Component {
             div.style.color = "#FAFAFA";
             var object = new CSS3DObject(div)
             return object;
-          }
+          }*/
           
         
           function createCSS3DImage(i){
@@ -227,12 +256,14 @@ class Static extends Component {
               <div id="img"></div>
               <div id="static"></div>
             </div>
-            {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
+            {/*this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>*/}
             {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               <Link to='art'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               {/*<button className="btn-dark" onClick={e =>{e.preventDefault(); this.getStarted()}}>Get Started</button>*/}
-              <GetStarted/>
-
+              {/*<GetStarted/>*/}
+              {/*<button className="btn-dark">Toss A Coin</button><br/><br/>*/
+              <ModalSet/>
+        }
               <br/>
             </div>
            }
