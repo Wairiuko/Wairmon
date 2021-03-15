@@ -21,26 +21,34 @@ export const ModalSet = () => {
     <button className="btn-dark" onClick={handleShow}>About</button>
     <Modal show={show} onHide={handleClose} style={{color: "black"}}>
       <Modal.Header closeButton>
-        <Modal.Title>A decentralized web app for creating all kinds of art</Modal.Title>
+        <Modal.Title>A decentralized web app for creating all kinds of NFT art</Modal.Title>
       </Modal.Header>
       <Modal.Body>{/*By tossing an artwork, you agree to showcase your art NFT in our collection and
         agree that 30% of the sale of that artwork will be used to help a farm in Italy and in Kenya
       grow trees for to increase carbon absorption in the  world*/}
       <div id="static">
               
-              <h2>Built on top of the Ethereum Blockchain network</h2>
-              <p>W3irds art is a platform where artists who are willing to bend the rules
-              join in to create rare one-of-a-kind art either collaboratively or individually. 
+              <h2>Built on top of the Blockchain network</h2>
+              <p>W3art is a platform where artists who are willing to bend the rules
+              join in to create rare one-of-a-kind art Non-Fungible Tokens (NFTs) either collaboratively or individually. 
               </p>
-              <h2>Liberating Art through Programming</h2>
-              <p>Here art is more than just a png or jpg image file shown on the web. 
-              We have given the artists the power to visualize their art the best way they can.
-              And that is by getting rid of all the bottlenecks of traditional/mainstream art platforms.</p>
+              <h2>It's all about the art</h2>
+              <p>Generative code (JS, pure CSS) artists? All you need is here.
+            You love to draw in the browser? It's here too!
+            Have something cool you have done with a 3D scene and would want a place to best
+            showcase it? Well, here's the place!
+            Even for that cool png or jpg. Don't go no further.
+              </p>
               <h2>For Collectors?</h2>
-              <p>Find a gem you and give it some love.</p>
+              <p>Find a gem you like and give it some love.</p>
+              <h2>The Catch?</h2>
+              <p>Oh, artists get 10% royalties and 10% goes into our reserve for funding sustainable environmental 
+                related projects. That's it! Everybody wins!.
+              </p>
           </div>
       </Modal.Body>
       <Modal.Footer>
+        <a href="https://discord.gg/aPkUgjn2" target="_blank" style={{color: "black"}}>Get in touch on our Discord</a>
         <button className="btn-dark" onClick={handleClose}>Close</button>
         {/*<button className="btn-dark">Continue</button>*/}
       </Modal.Footer>
@@ -277,7 +285,9 @@ class Static extends Component {
               <br/>
               <br/>
               
-              <GetStarted/>
+              <GetStarted/><br/> <br/>
+
+              <a href="https://discord.gg/aPkUgjn2" target="_blank">Discord</a><br/><a href="https://twitter.com/simon_wairiuko" target="_blank">Twitter</a>
               {/*<button className="btn-dark">Toss A Coin</button><br/><br/>*/
               /*<ModalSet/>*/
         }
