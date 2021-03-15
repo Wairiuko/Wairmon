@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {CSS3DObject, CSS3DRenderer} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import {withRouter} from 'react-router-dom';
-//import Emoji from './Emoji';
+import Emoji from './Emoji';
 import Modal from 'react-bootstrap/Modal';
 import {Link, useHistory} from 'react-router-dom';
 import Web3Modal from 'web3modal';
@@ -18,18 +18,31 @@ export const ModalSet = () => {
 
   return(
     <>
-    <button className="btn-dark" onClick={handleShow}>Toss an Artwork</button>
+    <button className="btn-dark" onClick={handleShow}>About</button>
     <Modal show={show} onHide={handleClose} style={{color: "black"}}>
       <Modal.Header closeButton>
-        <Modal.Title>What Does This Mean?</Modal.Title>
+        <Modal.Title>A decentralized web app for creating all kinds of art</Modal.Title>
       </Modal.Header>
-      <Modal.Body>By tossing an artwork, you agree to showcase your art NFT in our collection and
+      <Modal.Body>{/*By tossing an artwork, you agree to showcase your art NFT in our collection and
         agree that 30% of the sale of that artwork will be used to help a farm in Italy and in Kenya
-        grow trees for to increase carbon absorption in the  world
+      grow trees for to increase carbon absorption in the  world*/}
+      <div id="static">
+              
+              <h2>Built on top of the Ethereum Blockchain network</h2>
+              <p>W3irds art is a platform where artists who are willing to bend the rules
+              join in to create rare one-of-a-kind art either collaboratively or individually. 
+              </p>
+              <h2>Liberating Art through Programming</h2>
+              <p>Here art is more than just a png or jpg image file shown on the web. 
+              We have given the artists the power to visualize their art the best way they can.
+              And that is by getting rid of all the bottlenecks of traditional/mainstream art platforms.</p>
+              <h2>For Collectors?</h2>
+              <p>Find a gem you and give it some love.</p>
+          </div>
       </Modal.Body>
       <Modal.Footer>
         <button className="btn-dark" onClick={handleClose}>Close</button>
-        <button className="btn-dark">Continue</button>
+        {/*<button className="btn-dark">Continue</button>*/}
       </Modal.Footer>
 
     </Modal>
@@ -256,13 +269,17 @@ class Static extends Component {
               <div id="img"></div>
               <div id="static"></div>
             </div>
-            {/*this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>*/}
+            {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
             {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               <Link to='art'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               {/*<button className="btn-dark" onClick={e =>{e.preventDefault(); this.getStarted()}}>Get Started</button>*/}
-              {/*<GetStarted/>*/}
-              {/*<button className="btn-dark">Toss A Coin</button><br/><br/>*/
               <ModalSet/>
+              <br/>
+              <br/>
+              
+              <GetStarted/>
+              {/*<button className="btn-dark">Toss A Coin</button><br/><br/>*/
+              /*<ModalSet/>*/
         }
               <br/>
             </div>

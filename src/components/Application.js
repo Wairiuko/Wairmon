@@ -53,7 +53,7 @@ async determineWeb3(){
 
 
   render() {
-    /*
+    
     if(this.state.needWeb3){
       return (
       <>
@@ -71,7 +71,7 @@ async determineWeb3(){
       </>
       )
       
-    }*/
+    }
 
 
 
