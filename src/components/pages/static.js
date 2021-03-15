@@ -48,8 +48,8 @@ export const ModalSet = () => {
           </div>
       </Modal.Body>
       <Modal.Footer>
-        <a href="https://github.com/Wairiuko/w3irdsart" target="_blank" style={{color: "black"}}>View Source Code on Github </a><br/>
-      And <a href="https://discord.gg/aPkUgjn2" target="_blank" style={{color: "black"}}>Get in touch on our Discord</a><br/>
+        <a href="https://github.com/Wairiuko/w3irdsart" target="_blank" rel="noopener noreferrer" style={{color: "black"}}>View Source Code on Github </a><br/>
+      And <a href="https://discord.gg/aPkUgjn2" target="_blank" rel="noopener noreferrer" style={{color: "black"}}>Get in touch on our Discord</a><br/>
         <button className="btn-dark" onClick={handleClose}>Close</button>
         {/*<button className="btn-dark">Continue</button>*/}
       </Modal.Footer>
@@ -288,7 +288,7 @@ class Static extends Component {
               
               <GetStarted/><br/> <br/>
 
-              <a href="https://discord.gg/aPkUgjn2" target="_blank">Discord</a><br/><a href="https://github.com/Wairiuko/w3irdsart" target="_blank">Github</a><br/><a href="https://twitter.com/simon_wairiuko" target="_blank">Twitter</a>
+              <a href="https://discord.gg/aPkUgjn2" rel="noopener noreferrer"target="_blank">Discord</a><br/><a href="https://github.com/Wairiuko/w3irdsart" rel="noopener noreferrer"target="_blank">Github</a><br/><a href="https://twitter.com/simon_wairiuko" rel="noopener noreferrer" target="_blank">Twitter</a>
               {/*<button className="btn-dark">Toss A Coin</button><br/><br/>*/
               /*<ModalSet/>*/
         }
