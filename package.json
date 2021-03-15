@@ -30,7 +30,7 @@
     "react-scripts": "^3.4.3",
     "react-split-pane": "0.1.92",
     "styled-components": "^5.2.1",
-    "three": "^0.123.0",
+    "three": ">=0.125.0",
     "three.map.control": "^1.6.0",
     "truffle": "^5.1.58",
     "truffle-hdwallet-provider-privkey": "^0.3.0",

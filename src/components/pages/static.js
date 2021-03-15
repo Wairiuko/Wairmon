@@ -201,9 +201,10 @@ class Static extends Component {
             return object;
           }
           function createSides(geometry) {
+            var faces = geometry.faces;
 
             // merge these, or compensate the offset
-            for ( var i = 0 ; i < geometry.faces.length; i += 2) {
+            for ( var i = 0 ; i < faces.length; i += 2) {
     
                 // create a new object
                 var side = createCSS3DImage(i);
