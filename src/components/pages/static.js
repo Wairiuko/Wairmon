@@ -202,7 +202,7 @@ class Static extends Component {
           }
           function createSides(geometry) {
             //geometry = new THREE.BufferGeometry()
-
+            
             // merge these, or compensate the offset
             for ( var i = 0 ; i < geometry.faces.length; i += 2) {
     
