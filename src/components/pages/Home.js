@@ -273,7 +273,7 @@ async connectWeb3() {
       this.setState({ loading: false })
 
     }else{
-      window.alert("W3irds Art does not live in the detected network...yet")
+      window.alert("W3irds Art does not live in the detected network...yet. Kindly switch your networks to Rinkeby testnet:)")
       this.setState({loading: false});
     }
     

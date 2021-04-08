@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import '../App.css'
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
@@ -11,6 +11,56 @@ import Web3Modal from 'web3modal';
 import Web3 from 'web3';
 
 
+export const TossModal = () => {
+  //Handling modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  //Handling address
+  const [copy, setCopy] = useState('')
+  const inputRef = useRef(null)
+  function copyBoard(e) {
+    inputRef.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+    setCopy('Copied!')
+  }
+  return (
+    <>
+    <button className="btn-dark" onClick={handleShow}>Toss A Coin</button>
+    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
+      <Modal.Header closeButton>
+        <Modal.Title>Support this project</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div id="static">
+          We recommend sending at least 0.001Eth to <form>
+            <input type="text"
+            ref = {inputRef}
+            value = "0x20dA165deB81dBB042fE4A9d4808399eF2477c5d"
+            />
+          </form>
+          {
+            document.queryCommandSupported('copy') &&
+            <div>
+              <button onClick={copyBoard}>Copy</button> 
+              {copy}
+            </div>
+          }
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <p>Feel free to send tokens as well. Each coin tossed here will be used to support
+        the vision of this project, and in particular help sustain
+        <a style={{color: "grey"}} href="https://docs.google.com/document/d/1-LsYgqshsqbC2ljQwkSsEoP04-635iTYN1haiw-taI8/edit"  target="_blank" rel="noopener noreferrer"> the Regrò Project</a> by artist
+        Serste in Italy. More farm projects will be launched soon.
+        </p>
+        <button className="btn-dark" onClick={handleClose}>Close</button>
+      </Modal.Footer>
+    </Modal>
+    </>
+  )
+}
 export const ModalSet = () => {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
@@ -21,35 +71,23 @@ export const ModalSet = () => {
     <button className="btn-dark" onClick={handleShow}>About</button>
     <Modal show={show} onHide={handleClose} style={{color: "black"}}>
       <Modal.Header closeButton>
-        <Modal.Title>A decentralized web app for creating all kinds of NFT art</Modal.Title>
+        <Modal.Title>A decentralized web app for creating all kinds of art</Modal.Title>
       </Modal.Header>
       <Modal.Body>{/*By tossing an artwork, you agree to showcase your art NFT in our collection and
         agree that 30% of the sale of that artwork will be used to help a farm in Italy and in Kenya
       grow trees for to increase carbon absorption in the  world*/}
       <div id="static">
               
-              <h2>Built on top of the Blockchain network</h2>
-              <p>W3art is a platform where artists who are willing to bend the rules
-              join in to create rare one-of-a-kind art Non-Fungible Tokens (NFTs) either collaboratively or individually. 
-              </p>
-              <h2>It's all about the art</h2>
-              <p>Generative code (JS, pure CSS) artists? All you need is here.
-            You love to draw in the browser? It's here too!
-            Have something cool you have done with a 3D scene and would want a place to best
-            showcase it? Well, here's the place!
-            Even for that cool png or jpg. Don't go no further.
-              </p>
-              <h2>For Collectors?</h2>
-              <p>Find a gem you like and give it some love.</p>
-              <h2>The Catch?</h2>
-              <p>Oh, artists get 10% royalties and 10% goes into our reserve for funding sustainable environmental 
-                related projects. That's it! Everybody wins!.
+              
+              <p>We are currently in Beta testing. To support this project and 
+                its core purpose explained in <a href="https://beta.cent.co/SimonSmog/" target="_blank" rel="noopener noreferrer" style={{color: "grey"}} >
+                  these Cent posts</a>, please feel free to <TossModal/>.
               </p>
           </div>
       </Modal.Body>
       <Modal.Footer>
         <a href="https://github.com/Wairiuko/w3irdsart" target="_blank" rel="noopener noreferrer" style={{color: "black"}}>View Source Code on Github </a><br/>
-      And <a href="https://discord.gg/aPkUgjn2" target="_blank" rel="noopener noreferrer" style={{color: "black"}}>Get in touch on our Discord</a><br/>
+      | <a href="https://discord.gg/aPkUgjn2" target="_blank" rel="noopener noreferrer" style={{color: "black"}}>Get in touch on our Discord</a><br/>
         <button className="btn-dark" onClick={handleClose}>Close</button>
         {/*<button className="btn-dark">Continue</button>*/}
       </Modal.Footer>
@@ -281,9 +319,13 @@ class Static extends Component {
             </div>
             {this.props.needWeb3 ? <div style={{position: 'absolute', top: 0, textAlign: 'center', width: '100%'}}><h3><Emoji symbol="👋"/>Hi there! Please use a Web3 enabled browser to interact with this site<Emoji symbol="😊"/></h3><h5>Wait, you can create a <Link to='project'>project here</Link> and get the hang of it<Emoji symbol="😊"/></h5></div> : <span></span>}
             {this.props.isLoggedIn ? <div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
+              <ModalSet/><br/>
               <Link to='art'><button className="btn-dark">Back</button></Link> </div> :<div style={{position: 'absolute', bottom: 210, justifyContent: 'center', textAlign: 'center', width: '100%'}}>
               {/*<button className="btn-dark" onClick={e =>{e.preventDefault(); this.getStarted()}}>Get Started</button>*/}
               <ModalSet/>
+              <br/>
+              <br/>
+              <TossModal/>
               <br/>
               <br/>
               

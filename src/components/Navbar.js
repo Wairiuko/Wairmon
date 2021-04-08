@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import wairmon from '../wairmon.png';
 import {Link, withRouter} from 'react-router-dom';
+import {TossModal} from './pages/static';
 //import Web3Modal from 'web3modal'
 //import Web3 from 'web3';
 
@@ -24,6 +25,7 @@ class Navbar extends Component {
            <small className="text-secondary">{this.props.totalSupply}</small>
           &nbsp;
         </Link>
+        <TossModal/>
        
         <ul className="navbar-nav px-3">
           

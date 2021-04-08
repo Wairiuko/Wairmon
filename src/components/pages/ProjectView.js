@@ -7,11 +7,11 @@ import { CssEditor, HtmlEditor, JavascriptEditor} from "./Editors";
 //import { useParams } from 'react-router-dom';
 
 const img = new Image();
-export function ProjectTest(props){
+/*export function ProjectTest(props){
     const date = props.match.params.date;
     const title = props.match.params.title;
 
-}
+}*/
 class ProjectView extends Component{
 
 state={
