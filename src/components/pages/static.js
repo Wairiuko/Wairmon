@@ -37,7 +37,7 @@ export const TossModal = () => {
           We recommend sending at least 0.001Eth to <form>
             <input type="text"
             ref = {inputRef}
-            value = "0x20dA165deB81dBB042fE4A9d4808399eF2477c5d"
+            value = "0x7E8Eb960C8E1eB91Fad7BF5c58C936E508DffCBD"
             />
           </form>
           {
@@ -50,10 +50,8 @@ export const TossModal = () => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <p>Feel free to send tokens as well. Each coin tossed here will be used to support
-        the vision of this project, and in particular help sustain
-        <a style={{color: "grey"}} href="https://docs.google.com/document/d/1-LsYgqshsqbC2ljQwkSsEoP04-635iTYN1haiw-taI8/edit"  target="_blank" rel="noopener noreferrer"> the Regrò Project</a> by artist
-        Serste in Italy. More farm projects will be launched soon.
+        <p> 
+          Each coin is going to support tree planting in Malindi, Kenya.
         </p>
         <button className="btn-dark" onClick={handleClose}>Close</button>
       </Modal.Footer>
