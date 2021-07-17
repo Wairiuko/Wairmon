@@ -14,7 +14,7 @@ We are currently testing different blockchains.
 
 * To run locally simply  clone and `npm start` 
 
-* To contribute, kindly read [the guidelines](./src/components/docs/Contibuting.md)
+* To contribute, kindly read [the guidelines](./src/components/docs/Contributing.md)
 
 * To learn more, head over to our [FAQ](./src/components/docs/FAQ.md)
 
