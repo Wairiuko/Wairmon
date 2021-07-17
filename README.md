@@ -10,3 +10,7 @@ Wairmon is a completely decentralized platform for interactively creating and di
 
 This is the official site: [Wairmon.com](https://wairmon.com)
 
+We are currently testing different blockchains.
+
+To run locally simply  clone and `npm start` 
+
