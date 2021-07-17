@@ -19,7 +19,7 @@ class Navbar extends Component {
           className="navbar-brand"
         >
           <img src={wairmon} width="30" height="30" className="d-inline-block align-top" alt="" /> 
-          Web3Art
+          
           <small className="text-secondary">{this.props.projectCount}</small>
           &nbsp;
            <small className="text-secondary">{this.props.totalSupply}</small>
