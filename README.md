@@ -12,8 +12,12 @@ This is the official site: [Wairmon.com](https://wairmon.com)
 
 We are currently testing different blockchains.
 
-To run locally simply  clone and `npm start` 
+* To run locally simply  clone and `npm start` 
 
-To learn more, head over to our [FAQ](./src/components/docs/FAQ.md)
+* To contribute, kindly read [the guidelines](./src/components/docs/Contibuting.md)
+
+* To learn more, head over to our [FAQ](./src/components/docs/FAQ.md)
+
+License: [MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
 
 
