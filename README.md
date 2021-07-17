@@ -1,9 +1,8 @@
 
 # Wairmon
 
-## Okay still thinking about what it is :))
-![Homepage]
-(https://ipfs.io/ipfs/QmeQixN5LQ2Yo8MHQZWQMEmdWrNxA6VtiGs8KjbQCwUBts)
+###### Okay still thinking about what it is :))
+![Homepage](https://ipfs.io/ipfs/QmeQixN5LQ2Yo8MHQZWQMEmdWrNxA6VtiGs8KjbQCwUBts)
 
 ### A decentralized platform for interactively creating and displaying cryptoart
 
