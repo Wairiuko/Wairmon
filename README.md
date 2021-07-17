@@ -14,3 +14,6 @@ We are currently testing different blockchains.
 
 To run locally simply  clone and `npm start` 
 
+To learn more, head over to our [FAQ](./src/components/docs/FAQ.md)
+
+
