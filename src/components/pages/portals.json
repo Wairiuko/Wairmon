@@ -1,0 +1,40 @@
+{ "Portals":  [
+    {   "name": "hilltop-city-view",
+        "id": 0,
+        "coord": {
+        "x": "-166",
+        "y": "363",
+        "z": "5"
+    }},
+    {   "name": "skyscraper-rooftop",
+        "id": 1,
+        "coord": {
+        "x": "1882",
+        "y": "143",
+        "z": "258"
+    }
+},
+{   "name": "stadium",
+    "id":2,
+        "coord": {
+        "x": "362",
+        "y": "13",
+        "z": "-1628"
+    }
+},
+    
+    {   "name": "beach",
+        "id":3,
+        "coord": {
+        "x": "-1523",
+        "y": "8",
+        "z": "-1098"
+    }},
+    {   "name": "hilltop-middle",
+        "id": 4,
+        "coord": {
+        "x": "-284",
+        "y": "339",
+        "z": "87"
+    }}
+    ]}

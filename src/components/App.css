@@ -1,15 +1,22 @@
 /* Styles go here */
+body, html{
+	height: 100%;
+}
 body {
 	margin: 0;
 	background-image:linear-gradient( rgb(3, 32, 56), rgb(0, 0, 0));
+	/*background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);*/
+	
 	/*background: '#999';*/
     color: rgb(255, 255, 255);
-	background-repeat: repeat;
+	background-repeat: no-repeat;
+	background-size: cover;
 	margin-top: 50px;
 	margin-bottom: 100px;
 	font-family: Monospace;
 	font-size: 13px;
 	line-height: 24px;
+	height: 100%;
 }
 
 

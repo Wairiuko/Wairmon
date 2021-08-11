@@ -25,6 +25,7 @@ class Navbar extends Component {
            <small className="text-secondary">{this.props.totalSupply}</small>
           &nbsp;
         </Link>
+        <Link to='globe' ><button className="btn-dark" >Globe</button></Link>
         <TossModal/>
        
         <ul className="navbar-nav px-3">

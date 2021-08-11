@@ -1,6 +1,8 @@
 body {
 	margin: 0;
-	background-image:linear-gradient( rgb(10, 134, 236), rgb(255, 255, 255));
+	/*background-image:linear-gradient( rgb(10, 134, 236), rgb(255, 255, 255));*/
+	background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+	background-repeat: no-repeat;
 	color: #fff;
 	font-family: Monospace;
 	font-size: 13px;

@@ -14,7 +14,9 @@ import Static from './pages/static';
 import Home from './pages/Home';
 //import Artwork from './pages/Artwork';
 import Project from './pages/project';
+import Globe from './pages/3dtest';
 import SingleProject from './pages/SingleProject';
+import NotFound from './pages/NotFound';
 //import ProjectForm from './pages/Form';
 //import Box from '3box';
 //import Emoji from './pages/Emoji';
@@ -67,6 +69,8 @@ async determineWeb3(){
         )}
       ></Route>
       <Route exact path="/project" component={Project}></Route>
+      <Route exact path="/globe" component={Globe}></Route>
+      <Route component={NotFound}></Route>
       </Switch>
       </>
       )
@@ -119,7 +123,8 @@ async determineWeb3(){
                 {
                   //<Route path='/artwork' component={Artwork}></Route>
                  <Route exact path='/project' component={Project}></Route>
-                 
+                }{
+                 <Route exact path='/globe' component={Globe}></Route>
                     //<React.Fragment>
                      //</React.Fragment> <Project
                     //  isLoggedIn = {this.state.isLoggedIn}
@@ -134,6 +139,15 @@ async determineWeb3(){
                   />
                   </React.Fragment>
                 )}></Route> */
+                }{/*
+                  <Route exact path="/globe/:name" render={props => (
+                    <>
+                    <Globe {...props}/>
+                    </>
+                  )}></Route>*/
+                }
+                {
+                  <Route component={NotFound}></Route>
                 }
                 <Route exact path="/project/:id" render={props => (
                   <React.Fragment>
